@@ -1,5 +1,4 @@
 # ID3: Curating and Evaluating Resources for Faculty
-
 **OLC Instructional Designer Certificate Program**  
 Lauren B. Schwartz | Instructional Development Specialist  
 Salem Community College | Carneys Point, NJ  
@@ -8,7 +7,6 @@ Salem Community College | Carneys Point, NJ
 ---
 
 ## About This Repository
-
 Course artifacts from **ID3: Curating and Evaluating Resources for Faculty**, part of the OLC Instructional Designer Certificate Program. This course runs June–July 2026 and focuses on evaluation frameworks, content curation strategies, resource organization, and faculty support development.
 
 Where possible, artifacts in this repo are built as functional tools rather than static documents — consistent with my broader practice of building things I can actually use.
@@ -57,7 +55,37 @@ Two interactive evaluation checklists built as a single GitHub Pages–hosted HT
 
 ---
 
-*More artifacts will be added as the course progresses through Weeks 2–4.*
+### Week 2 — Curating Resources
+
+#### [Week 2 Resource Padlet](https://padlet.com/lbschwartz/id3-week-2-curated-resources-nfin3z61lo5tv1ki)
+
+A curated collection of instructional design and OER resources organized into three categories:
+
+- **OER Materials** — Repositories, frameworks, and guides for finding and evaluating open educational resources
+- **Online Tools** — Digital tools for instructional design practice and faculty support
+- **Teaching & ID** — Resources focused on pedagogy, course design, and instructional development
+
+---
+
+### Week 3 — Organization Schemas & Outlines
+
+#### [Building with OER: A Practical Guide for Faculty](https://padlet.com/lbschwartz/building-with-oer-a-practical-guide-for-faculty)
+
+A faculty-facing resource guide organized around five practical questions faculty ask when adopting OER:
+
+1. What is OER and how is it different from a traditional textbook?
+2. Where do I find quality OER materials for my discipline?
+3. How do I evaluate whether an OER resource is actually good?
+4. How do I organize OER materials into a cohesive course experience?
+5. How do I build effective assessment with OER materials?
+
+#### [Finding and Using OER Materials](./oer-guide.html)
+
+A standalone GitHub Pages resource built from the ENG101 Master Course OER guide — a publicly accessible version of SCC's internal faculty OER resource page, covering textbooks, teaching materials, online tools, online resources, and video & multimedia. Built to serve as the Q4 resource in the faculty guide above.
+
+---
+
+*More artifacts will be added as the course progresses through Week 4.*
 
 ---
 
@@ -66,6 +94,8 @@ Two interactive evaluation checklists built as a single GitHub Pages–hosted HT
 I'm rebuilding SCC's Adjunct & Faculty Info Portal — a Canvas-based resource repository that has been my primary faculty support infrastructure for the past several years. This course is running in direct parallel with that project, so every artifact I build here is designed to be immediately deployable, not theoretical.
 
 The two evaluation checklists were built around the questions I actually ask myself during vendor evaluation at a small, resource-constrained community college: *Will we use this? Can we afford it? Do we already have something? Who owns it? How much does this add to faculty workload? Does it map to our strategic priorities? Does it work in Canvas? Does it improve what students learn?*
+
+The faculty guide extends that same logic outward — the questions organizing it are ones I've been asked. The OER resource page it links to was built during a master course rebuild this semester when full-time faculty couldn't deliver the content on time. Both artifacts are already in use.
 
 ---
 
