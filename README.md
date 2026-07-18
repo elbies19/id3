@@ -7,7 +7,7 @@ Salem Community College | Carneys Point, NJ
 ---
 
 ## About This Repository
-Course artifacts from **ID3: Curating and Evaluating Resources for Faculty**, part of the OLC Instructional Designer Certificate Program. This course runs June–July 2026 and focuses on evaluation frameworks, content curation strategies, resource organization, and faculty support development.
+Course artifacts from **ID3: Curating and Evaluating Resources for Faculty**, part of the OLC Instructional Designer Certificate Program. This course ran June–July 2026 and focused on evaluation frameworks, content curation strategies, resource organization, and faculty support development.
 
 Where possible, artifacts in this repo are built as functional tools rather than static documents — consistent with my broader practice of building things I can actually use.
 
@@ -85,17 +85,32 @@ A standalone GitHub Pages resource built from the ENG101 Master Course OER guide
 
 ---
 
-*More artifacts will be added as the course progresses through Week 4.*
+### Week 4 — Faculty Guide (Final)
+
+#### [SCC Faculty & Adjunct Portal](./faculty-portal/)
+
+A complete, multi-page faculty resource portal built as a publicly accessible GitHub Pages site — the final deliverable for ID3 and a direct extension of SCC's internal Canvas-based faculty support infrastructure.
+
+The portal replicates the structure, visual language, and content of SCC's Canvas faculty portal (built in DesignPLUS with institutional branding) in a publicly hostable format, solving a problem that ran throughout this course: the most substantive faculty-facing work I do lives behind LMS authentication and cannot be shared as a course artifact in the conventional sense.
+
+**Pages:**
+
+- **[index.html](./faculty-portal/index.html)** — Portal landing page with navigation grid
+- **[instructor-checklist.html](./faculty-portal/instructor-checklist.html)** — Using the Instructor Checklist: a guide to SCC's ReadyGO-powered pre-semester checklist, covering the Core Four items (Syllabus Addendum, Weight Assignments, Welcome Message, Week 1 Content) with nested What It Is / Why It Matters / How to Do It tabs for each
+- **[oer-materials-v2.html](./faculty-portal/oer-materials-v2.html)** — Finding and Using OER Materials: curated guide to open textbooks, teaching materials, online tools, online resources, and video & multimedia for composition faculty, with direct link to the OER & Online Resource Evaluation Checklist
+- **[teaching-tools-v2.html](./faculty-portal/teaching-tools-v2.html)** — Useful Tools for Your Teaching: curated and annotated tools for writing instruction, research, accessibility, pedagogy, and student engagement
+
+**Design notes:** Built to match SCC's March 2026 brand guidelines (`#016450` primary, Montserrat/Gotham, black accent) and DesignPLUS visual conventions (vertical tab panels, bordered heading treatment, callout boxes, link list style). Fully responsive. All content is drawn from live Canvas pages currently deployed to SCC courses.
 
 ---
 
 ## Context
 
-I'm rebuilding SCC's Adjunct & Faculty Info Portal — a Canvas-based resource repository that has been my primary faculty support infrastructure for the past several years. This course is running in direct parallel with that project, so every artifact I build here is designed to be immediately deployable, not theoretical.
+I'm rebuilding SCC's Adjunct & Faculty Info Portal — a Canvas-based resource repository that has been my primary faculty support infrastructure for the past several years. This course ran in direct parallel with that project, so every artifact built here is designed to be immediately deployable, not theoretical.
 
 The two evaluation checklists were built around the questions I actually ask myself during vendor evaluation at a small, resource-constrained community college: *Will we use this? Can we afford it? Do we already have something? Who owns it? How much does this add to faculty workload? Does it map to our strategic priorities? Does it work in Canvas? Does it improve what students learn?*
 
-The faculty guide extends that same logic outward — the questions organizing it are ones I've been asked. The OER resource page it links to was built during a master course rebuild this semester when full-time faculty couldn't deliver the content on time. Both artifacts are already in use.
+The faculty guide extends that same logic outward — the questions organizing it are ones I've been asked. The portal pages it links to were built during a master course rebuild this semester when full-time faculty couldn't deliver content on time. Both artifacts are already in use.
 
 ---
 
