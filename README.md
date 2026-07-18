@@ -87,7 +87,7 @@ A standalone GitHub Pages resource built from the ENG101 Master Course OER guide
 
 ### Week 4 — Faculty Guide (Final)
 
-#### [SCC Faculty & Adjunct Portal](./faculty-portal/)
+#### [SCC Faculty & Adjunct Portal](./facultyportal/)
 
 A complete, multi-page faculty resource portal built as a publicly accessible GitHub Pages site — the final deliverable for ID3 and a direct extension of SCC's internal Canvas-based faculty support infrastructure.
 
@@ -95,10 +95,10 @@ The portal replicates the structure, visual language, and content of SCC's Canva
 
 **Pages:**
 
-- **[index.html](./faculty-portal/index.html)** — Portal landing page with navigation grid
-- **[instructor-checklist.html](./faculty-portal/instructor-checklist.html)** — Using the Instructor Checklist: a guide to SCC's ReadyGO-powered pre-semester checklist, covering the Core Four items (Syllabus Addendum, Weight Assignments, Welcome Message, Week 1 Content) with nested What It Is / Why It Matters / How to Do It tabs for each
-- **[oer-materials-v2.html](./faculty-portal/oer-materials-v2.html)** — Finding and Using OER Materials: curated guide to open textbooks, teaching materials, online tools, online resources, and video & multimedia for composition faculty, with direct link to the OER & Online Resource Evaluation Checklist
-- **[teaching-tools-v2.html](./faculty-portal/teaching-tools-v2.html)** — Useful Tools for Your Teaching: curated and annotated tools for writing instruction, research, accessibility, pedagogy, and student engagement
+- **[index.html](./facultyportal/index.html)** — Portal landing page with navigation grid
+- **[instructor-checklist.html](./facultyportal/instructor-checklist.html)** — Using the Instructor Checklist: a guide to SCC's ReadyGO-powered pre-semester checklist, covering the Core Four items (Syllabus Addendum, Weight Assignments, Welcome Message, Week 1 Content) with nested What It Is / Why It Matters / How to Do It tabs for each
+- **[oer-materials-v2.html](./facultyportal/oer-materials-v2.html)** — Finding and Using OER Materials: curated guide to open textbooks, teaching materials, online tools, online resources, and video & multimedia for composition faculty, with direct link to the OER & Online Resource Evaluation Checklist
+- **[teaching-tools-v2.html](./facultyportal/teaching-tools-v2.html)** — Useful Tools for Your Teaching: curated and annotated tools for writing instruction, research, accessibility, pedagogy, and student engagement
 
 **Design notes:** Built to match SCC's March 2026 brand guidelines (`#016450` primary, Montserrat/Gotham, black accent) and DesignPLUS visual conventions (vertical tab panels, bordered heading treatment, callout boxes, link list style). Fully responsive. All content is drawn from live Canvas pages currently deployed to SCC courses.
 
