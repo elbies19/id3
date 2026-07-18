@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Using the Instructor Checklist — SCC Faculty Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --dp-primary: #016450;
+  --dp-primary-dark: #014a3b;
+  --dp-primary-light: #e6f0ed;
+  --dp-primary-mid: #c8ddd9;
+  --dp-gray: #B2B2B2;
+  --dp-graybg: #D9D9D9;
+  --dp-gray-text: #636363;
+  --dp-white: #ffffff;
+  --dp-body-bg: #f4f4f4;
+  --dp-border: #d0d0d0;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Lato', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: #1a1a1a; background: var(--dp-body-bg); }
+.site-nav { background: var(--dp-primary); padding: 0 1.5rem; display: flex; align-items: center; height: 48px; gap: 1.5rem; }
+.site-nav .brand { font-family: var(--font-heading); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.9); text-decoration: none; }
+.site-nav .nav-links { margin-left: auto; display: flex; }
+.site-nav .nav-links a { font-family: var(--font-heading); font-size: 11px; font-weight: 600; letter-spacing: 0.05em; color: rgba(255,255,255,0.75); text-decoration: none; padding: 0 0.9rem; height: 48px; display: flex; align-items: center; border-bottom: 3px solid transparent; transition: all 0.15s; }
+.site-nav .nav-links a:hover, .site-nav .nav-links a.active { color: #fff; border-bottom-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.08); }
+.dp-page { max-width: 960px; margin: 1.5rem auto; padding: 0 1.25rem; }
+.dp-header-block { background: var(--dp-white); border: 2px solid var(--dp-primary); border-radius: 4px; margin-bottom: 1.25rem; overflow: hidden; }
+.dp-header-top { background: var(--dp-primary); padding: 1.1rem 1.4rem 1rem; }
+.dp-header-pre { font-family: var(--font-heading); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.35); border-radius: 3px; display: inline-block; padding: 2px 8px; margin-bottom: 0.4rem; }
+.dp-header-title { font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: #fff; line-height: 1.2; }
+.dp-header-desc { background: #f9f9f9; border-top: 2px solid var(--dp-primary); padding: 0.9rem 1.4rem; font-size: 14.5px; color: var(--dp-gray-text); line-height: 1.65; }
+
+/* OUTER VERTICAL TABS */
+.dp-tabs-wrapper { display: flex; background: var(--dp-white); border: 1px solid var(--dp-border); border-radius: 4px; overflow: hidden; min-height: 520px; }
+.dp-tab-buttons { width: 220px; flex-shrink: 0; border-right: 1px solid var(--dp-border); background: #fafafa; display: flex; flex-direction: column; }
+.dp-tab-btn { font-family: var(--font-heading); font-size: 12.5px; font-weight: 600; color: var(--dp-gray-text); background: none; border: none; border-bottom: 1px solid var(--dp-border); border-left: 4px solid transparent; padding: 0.85rem 1rem 0.85rem 0.85rem; text-align: left; cursor: pointer; line-height: 1.35; transition: all 0.12s; }
+.dp-tab-btn:hover { background: var(--dp-primary-light); color: var(--dp-primary-dark); border-left-color: var(--dp-primary-mid); }
+.dp-tab-btn.active { background: var(--dp-primary-light); color: var(--dp-primary); border-left-color: var(--dp-primary); font-weight: 700; }
+.dp-tab-panels { flex: 1; padding: 1.5rem 1.75rem; overflow-y: auto; }
+.dp-tab-panel { display: none; }
+.dp-tab-panel.active { display: block; }
+.dp-panel-heading-display { font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--dp-primary-dark); border-bottom: 3px solid var(--dp-primary); padding-bottom: 0.5rem; margin-bottom: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
+.dp-panel-heading-display .panel-icon { width: 24px; height: 24px; background: var(--dp-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 11px; color: #fff; }
+.panel-intro { font-size: 14.5px; color: var(--dp-gray-text); margin-bottom: 1rem; line-height: 1.65; }
+.panel-intro + .panel-intro { margin-top: -0.25rem; }
+
+/* INNER HORIZONTAL SUB-TABS (What It Is / Why It Matters / How to Do It) */
+.dp-subtabs { margin-top: 1.1rem; }
+.dp-subtab-buttons { display: flex; border-bottom: 2px solid var(--dp-primary-mid); margin-bottom: 1rem; gap: 0; }
+.dp-subtab-btn { font-family: var(--font-heading); font-size: 12px; font-weight: 600; color: var(--dp-gray-text); background: none; border: none; border-bottom: 3px solid transparent; padding: 0.5rem 1rem; cursor: pointer; margin-bottom: -2px; transition: all 0.12s; }
+.dp-subtab-btn:hover { color: var(--dp-primary); }
+.dp-subtab-btn.active { color: var(--dp-primary); border-bottom-color: var(--dp-primary); }
+.dp-subtab-panel { display: none; padding-top: 0.5rem; }
+.dp-subtab-panel.active { display: block; }
+.dp-subtab-panel p { font-size: 14px; color: var(--dp-gray-text); line-height: 1.7; margin-bottom: 0.75rem; }
+.dp-subtab-panel ul { margin: 0.5rem 0 0.75rem 1.25rem; }
+.dp-subtab-panel ul li { font-size: 14px; color: var(--dp-gray-text); line-height: 1.65; margin-bottom: 0.35rem; }
+.dp-subtab-panel ul li a, .dp-subtab-panel p a { color: var(--dp-primary); text-decoration: none; }
+.dp-subtab-panel ul li a:hover, .dp-subtab-panel p a:hover { text-decoration: underline; }
+.dp-subtab-panel strong { color: #1a1a1a; }
+
+/* Core Four item label */
+.core-four-label { display: inline-block; background: var(--dp-primary); color: #fff; font-family: var(--font-heading); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 3px; padding: 2px 7px; margin-bottom: 0.5rem; }
+
+/* Callout */
+.dp-callout { border: 1px solid var(--dp-primary); border-radius: 4px; overflow: hidden; margin-top: 1.25rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+.dp-callout-title { background: var(--dp-primary); padding: 0.5rem 1rem; font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; text-align: center; }
+.dp-callout-title .fa-leaf { margin-right: 0.4rem; }
+.dp-callout-body { padding: 0.9rem 1.1rem; font-size: 13.5px; color: var(--dp-gray-text); text-align: center; line-height: 1.6; }
+.dp-callout-body a { color: var(--dp-primary); font-weight: 700; text-decoration: none; }
+
+/* Resource links */
+.dp-link-list { list-style: none; padding: 0; margin-top: 0.5rem; }
+.dp-link-list li { padding: 0.45rem 0 0.45rem 1rem; border-left: 3px solid var(--dp-primary-mid); margin-bottom: 0.5rem; background: #fafafa; border-radius: 0 3px 3px 0; font-size: 13.5px; }
+.dp-link-list li a { color: var(--dp-primary); text-decoration: none; font-weight: 600; }
+.dp-link-list li a:hover { text-decoration: underline; }
+
+/* Comparison table */
+.compare-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 13.5px; }
+.compare-table th { background: var(--dp-primary); color: #fff; font-family: var(--font-heading); font-size: 11.5px; font-weight: 700; padding: 0.5rem 0.75rem; text-align: left; }
+.compare-table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--dp-border); color: var(--dp-gray-text); vertical-align: top; }
+.compare-table tr:nth-child(even) td { background: #fafafa; }
+.compare-table .grade-label { font-weight: 700; color: var(--dp-primary-dark); }
+
+footer { max-width: 960px; margin: 1.25rem auto 0; padding: 1rem 1.25rem; font-size: 12.5px; color: #888; border-top: 1px solid var(--dp-border); display: flex; justify-content: space-between; }
+footer a { color: var(--dp-primary); text-decoration: none; }
+@media (max-width: 680px) { .dp-tabs-wrapper { flex-direction: column; } .dp-tab-buttons { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--dp-border); } .dp-tab-btn { border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; } .dp-tab-btn.active { border-left: none; border-bottom-color: var(--dp-primary); } .site-nav .nav-links { display: none; } }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand">SCC Faculty Portal</a>
+  <div class="nav-links">
+    <a href="instructor-checklist.html" class="active">Instructor Checklist</a>
+    <a href="oer-materials-v2.html">OER Materials</a>
+    <a href="teaching-tools-v2.html">Teaching Tools</a>
+  </div>
+</nav>
+
+<div class="dp-page">
+
+  <div class="dp-header-block">
+    <div class="dp-header-top">
+      <div class="dp-header-pre">Getting Started</div>
+      <div class="dp-header-title">Using the Instructor Checklist</div>
+    </div>
+    <div class="dp-header-desc">
+      In each course, you will see the SCC Instructor Checklist in your left-hand Canvas navigation. This checklist features four key items — our <strong>Core Four</strong> — that will ensure that you (and your students!) are prepared to start the semester off right, even before it begins.
+    </div>
+  </div>
+
+  <div class="dp-tabs-wrapper">
+    <div class="dp-tab-buttons">
+      <button class="dp-tab-btn active" data-tab="what">What is the Checklist?</button>
+      <button class="dp-tab-btn" data-tab="corefour">Core Four Items</button>
+      <button class="dp-tab-btn" data-tab="checking">How Do I Check Items Off?</button>
+      <button class="dp-tab-btn" data-tab="custom">Can I Create Custom Tasks?</button>
+      <button class="dp-tab-btn" data-tab="contact">Contact &amp; Resources</button>
+    </div>
+
+    <div class="dp-tab-panels">
+
+      <!-- What is the Checklist -->
+      <div class="dp-tab-panel active" id="tab-what">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-info" aria-hidden="true"></i></span>
+          What is the Instructor Checklist? Where can I find it?
+        </div>
+        <p class="panel-intro">The <strong>Instructor Checklist</strong> is a tool in Canvas designed to help you keep track of key action items we ask our instructors here at SCC to complete <em>prior to the start of class.</em></p>
+        <p class="panel-intro">You can locate the Instructor Checklist by selecting <strong>ReadyGO Instructor</strong> in the left-hand course navigation of your Canvas course shell.</p>
+        <p class="panel-intro">We know you have plenty on your plate already, so we've kept these to a minimum: what we call our <strong>Core Four Items</strong>.</p>
+
+        <div class="dp-callout">
+          <div class="dp-callout-title"><i class="fas fa-leaf"></i> SCC Teaching Tip</div>
+          <div class="dp-callout-body">
+            Don't see <strong>ReadyGO Instructor</strong> in your course navigation? Go to Settings → Navigation, locate "ReadyGO Instructor" in the features list, select the three dots next to it, then "Enable." Be sure to hit <strong>Save</strong> at the bottom of the page!<br><br>
+            Still having trouble? <a href="mailto:LSchwartz@salemcc.edu">Contact Lauren at LSchwartz@salemcc.edu</a> for help.
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Four -->
+      <div class="dp-tab-panel" id="tab-corefour">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-list-check" aria-hidden="true"></i></span>
+          What are the Core Four Items?
+        </div>
+        <p class="panel-intro">The <strong>Core Four</strong> items are designed with best practices and Caring Campus Behavioral Commitments in mind to ensure a productive start for you and your students right at the beginning of the term. Select any item below to learn more.</p>
+
+        <!-- Nested sub-tabs for Core Four -->
+        <div class="dp-subtabs" id="corefour-tabs">
+          <div class="dp-subtab-buttons">
+            <button class="dp-subtab-btn active" data-subtab="syllabus">Syllabus Addendum</button>
+            <button class="dp-subtab-btn" data-subtab="weights">Weight Assignments</button>
+            <button class="dp-subtab-btn" data-subtab="welcome">Welcome Message</button>
+            <button class="dp-subtab-btn" data-subtab="week1">Week 1 Content</button>
+          </div>
+
+          <div class="dp-subtab-panel active" id="subtab-syllabus">
+            <div class="core-four-label">Core Four — Item 1</div>
+            <div class="dp-subtab-buttons" style="margin-top:0.5rem;">
+              <button class="dp-subtab-btn active" data-subtab="syl-what">What It Is</button>
+              <button class="dp-subtab-btn" data-subtab="syl-why">Why It Matters</button>
+              <button class="dp-subtab-btn" data-subtab="syl-how">How to Do It</button>
+            </div>
+            <div class="dp-subtab-panel active" id="subtab-syl-what">
+              <p>Your <strong>course syllabus addendum</strong> provides critical course information students may (and should!) reference throughout the semester. This should include at a bare minimum:</p>
+              <ul>
+                <li>Course number and section</li>
+                <li>Instructor contact information</li>
+                <li>Textbook and other required course materials</li>
+                <li>Grading policies and criteria</li>
+                <li>Instructor and course policies</li>
+                <li>Course outline/tentative schedule</li>
+              </ul>
+            </div>
+            <div class="dp-subtab-panel" id="subtab-syl-why">
+              <p>The syllabus addendum is your contract with your students about how your class will be structured, what the semester will look like, how to contact you, and how they'll be assessed. A clear, well-structured syllabus serves as a day-one guidemap and sets the tone for a successful semester.</p>
+              <p>A well-constructed syllabus addendum is also one of the <strong>six behavioral commitments</strong> from Caring Campus, specifically <em>Commitment #3: Comprehensive Syllabus</em>. For more information, see pages 33–34 in <a href="https://salemcommunitycollege.sharepoint.com/SCC%20Documents/Shared%20Documents/Faculty%20Handbook/Current%20Faculty%20Handbook.pdf" target="_blank" rel="noopener">the SCC Faculty Handbook</a>.</p>
+            </div>
+            <div class="dp-subtab-panel" id="subtab-syl-how">
+              <p>You don't have to start from scratch! We offer several syllabus templates, both for Canvas and for printable handouts.</p>
+              <p><strong>Sample syllabi for reference:</strong></p>
+              <ul>
+                <li>HUM101 Introduction to the Humanities</li>
+                <li>ENG102 English Composition II</li>
+                <li>ENG202 Introduction to Speech Communication</li>
+              </ul>
+              <p><em>Templates and samples are available in your Canvas course shell.</em></p>
+            </div>
+          </div>
+
+          <div class="dp-subtab-panel" id="subtab-weights">
+            <div class="core-four-label">Core Four — Item 2</div>
+            <div class="dp-subtab-buttons" style="margin-top:0.5rem;">
+              <button class="dp-subtab-btn active" data-subtab="wt-what">What It Is</button>
+              <button class="dp-subtab-btn" data-subtab="wt-why">Why It Matters</button>
+              <button class="dp-subtab-btn" data-subtab="wt-how">How to Do It</button>
+            </div>
+            <div class="dp-subtab-panel active" id="subtab-wt-what">
+              <p>Not all assignments are created equal — <strong>weighted assignment groups</strong> allow you to set specific percentages for different types of assignments. You can have as many or as few of these as you wish, but the categories and their associated weights should match those outlined in your syllabus addendum.</p>
+              <p>Weighting your grades properly ensures that your overall course grades are fair, accurate, and reflective of student work.</p>
+            </div>
+            <div class="dp-subtab-panel" id="subtab-wt-why">
+              <p>With weighted assignment groups, Canvas calculates assignment grades based on the associated percentage rather than treating all assignments as equally important. An example:</p>
+              <table class="compare-table">
+                <tr><th>Scenario</th><th>Grade</th><th>What It Reflects</th></tr>
+                <tr><td>Assignment groups <strong>weighted</strong> (exam = 60%)</td><td class="grade-label">68 (D+)</td><td>Accurately reflects poor performance on the most important assignment</td></tr>
+                <tr><td>Assignment groups <strong>unweighted</strong></td><td class="grade-label">86 (B)</td><td>Inaccurately inflates grade; treats all assignments as equally important</td></tr>
+              </table>
+            </div>
+            <div class="dp-subtab-panel" id="subtab-wt-how">
+              <ul class="dp-link-list">
+                <li><a href="https://community.instructure.com/en/kb/articles/660669-how-do-i-weight-the-final-course-grade-based-on-assignment-groups" target="_blank" rel="noopener">Canvas Instructor Guide — How do I weight the final course grade based on assignment groups?</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="dp-subtab-panel" id="subtab-welcome">
+            <div class="core-four-label">Core Four — Item 3</div>
+            <div class="dp-subtab-buttons" style="margin-top:0.5rem;">
+              <button class="dp-subtab-btn active" data-subtab="wl-what">What It Is</button>
+              <button class="dp-subtab-btn" data-subtab="wl-why">Why It Matters</button>
+              <button class="dp-subtab-btn" data-subtab="wl-how">How to Do It</button>
+            </div>
+            <div class="dp-subtab-panel active" id="subtab-wl-what">
+              <p>No matter your age, educational level, or background, the first day of class can be nerve-wracking — for students and faculty alike. The first time a student opens your Canvas course is just like that first day of class, and it's critical for students to feel welcome in their new classroom environment. Posting a <strong>welcome message</strong> available on Day 1 is one of the easiest and most effective ways to set the tone for the semester.</p>
+            </div>
+            <div class="dp-subtab-panel" id="subtab-wl-why">
+              <p>SCC is a Caring Campus, dedicated to ensuring that our students experience a supportive, inclusive, and encouraging learning environment. One of the foundational pillars of the Caring Campus framework is its six behavioral commitments for faculty, including <em>Commitment #1: Welcome students to the course and each course session.</em></p>
+            </div>
+            <div class="dp-subtab-panel" id="subtab-wl-how">
+              <p>We highly recommend using Canvas's <strong>Announcement</strong> tool to post welcome messages. Some useful things to include:</p>
+              <ul>
+                <li>A brief description of the course and learning outcomes</li>
+                <li>Overall structure of the course</li>
+                <li>Textbook/Cengage/other required materials</li>
+                <li>Contact information</li>
+              </ul>
+              <ul class="dp-link-list" style="margin-top:0.75rem;">
+                <li><a href="https://community.instructure.com/en/kb/articles/660643-how-do-i-add-an-announcement-in-a-course" target="_blank" rel="noopener">Canvas Instructor Guide — How do I add an announcement in a course?</a></li>
+                <li><a href="https://community.instructure.com/en/kb/articles/660483-how-do-i-record-a-webcam-video-in-studio-using-a-chrome-or-edge-browser" target="_blank" rel="noopener">Canvas Instructor Guide — How do I record a webcam video in Canvas Studio?</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="dp-subtab-panel" id="subtab-week1">
+            <div class="core-four-label">Core Four — Item 4</div>
+            <div class="dp-subtab-buttons" style="margin-top:0.5rem;">
+              <button class="dp-subtab-btn active" data-subtab="w1-what">What It Is</button>
+              <button class="dp-subtab-btn" data-subtab="w1-why">Why It Matters</button>
+              <button class="dp-subtab-btn" data-subtab="w1-how">How to Do It</button>
+            </div>
+            <div class="dp-subtab-panel active" id="subtab-w1-what">
+              <p>While we'd all love to have our courses fully built before the semester starts, we know this can be challenging. To that end, while we don't ask instructors to have a complete course ready on Day 1, we do ask that you have <strong>Week 1 content</strong> available for your students. We recommend:</p>
+              <ul>
+                <li>Course syllabus addendum</li>
+                <li>Welcome message to students</li>
+                <li>"About Your Instructor" page</li>
+                <li>One low-stakes assignment to spur student engagement (introductions, syllabus quiz, etc.)</li>
+              </ul>
+            </div>
+            <div class="dp-subtab-panel" id="subtab-w1-why">
+              <p>Week 1 content provides the essential foundation for your entire semester. It establishes academic momentum, aligns student expectations with instructor goals, and clarifies the relevance of the material. This also aligns with Caring Campus <em>Commitment #5: Assignments Early and Often.</em></p>
+            </div>
+            <div class="dp-subtab-panel" id="subtab-w1-how">
+              <ul class="dp-link-list">
+                <li><a href="https://community.instructure.com/en/kb/articles/661046-how-do-i-create-a-quiz-using-new-quizzes" target="_blank" rel="noopener">Create a Syllabus Quiz Using New Quizzes</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div><!-- end corefour subtabs -->
+      </div>
+
+      <!-- Checking off -->
+      <div class="dp-tab-panel" id="tab-checking">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-check" aria-hidden="true"></i></span>
+          How Do I Check Items Off?
+        </div>
+        <p class="panel-intro">Checking items off the Instructor Checklist is a simple and streamlined process.</p>
+        <ol style="margin: 0.5rem 0 1rem 1.25rem; font-size:14px; color:var(--dp-gray-text); line-height:1.8;">
+          <li>Open <strong>ReadyGO Instructor</strong> in the course navigation</li>
+          <li>Click on the <strong>Instructor Checklist</strong> on the main landing page to access the Core Four items</li>
+          <li>A dynamic sidebar will appear with the Core Four items listed</li>
+          <li>Simply toggle checklist items as you complete them — the total updates in real time</li>
+        </ol>
+        <p class="panel-intro"><em>Screenshots showing the ReadyGO interface are available in your Canvas course shell.</em></p>
+      </div>
+
+      <!-- Custom tasks -->
+      <div class="dp-tab-panel" id="tab-custom">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-sliders" aria-hidden="true"></i></span>
+          Can I Create Custom Tasks?
+        </div>
+        <p class="panel-intro">While we don't currently allow instructors to create custom checklists, you <em>can</em> create custom tasks using the ReadyGO Instructor Tool to keep track of your own action items in addition to the Core Four.</p>
+        <ol style="margin: 0.5rem 0 1rem 1.25rem; font-size:14px; color:var(--dp-gray-text); line-height:1.8;">
+          <li>Go to <strong>Checklists &amp; Tasks</strong> in the ReadyGO Instructor Tool</li>
+          <li>Select <strong>+ Course Task</strong> in either the top ribbon or the Course Tasks submenu</li>
+          <li>Create a custom task for anything you'd like to keep track of</li>
+          <li>A new Course Tasks checklist will appear on your dashboard, allowing you to check tasks off as you complete them</li>
+        </ol>
+        <p class="panel-intro"><em>Screenshots showing this process are available in your Canvas course shell.</em></p>
+      </div>
+
+      <!-- Contact -->
+      <div class="dp-tab-panel" id="tab-contact">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-circle-question" aria-hidden="true"></i></span>
+          Contact &amp; Resources
+        </div>
+        <p class="panel-intro">Questions? Comments? Concerns? We're here to help!</p>
+        <ul class="dp-link-list">
+          <li><i class="fas fa-film" style="color:var(--dp-primary);margin-right:0.4rem;"></i> <a href="https://share.vidyard.com/watch/krHgkLX85eVZfRhaHXc51F" target="_blank" rel="noopener">ReadyGO: Instructor Guide (Video)</a></li>
+          <li><i class="fas fa-heart" style="color:var(--dp-primary);margin-right:0.4rem;"></i> Caring Campus: Top Six Behavioral Commitments for Faculty <em>(available in your Canvas course shell)</em></li>
+          <li><i class="fas fa-compass" style="color:var(--dp-primary);margin-right:0.4rem;"></i> SCC's Adjunct and Faculty Info Portal <em>(available in Canvas)</em></li>
+          <li><i class="fas fa-map" style="color:var(--dp-primary);margin-right:0.4rem;"></i> <a href="https://community.instructure.com/en/kb/canvas-lms-instructor-guide" target="_blank" rel="noopener">Canvas Instructor Guide</a></li>
+        </ul>
+
+        <div class="dp-callout">
+          <div class="dp-callout-title"><i class="fas fa-leaf"></i> SCC Teaching Tip</div>
+          <div class="dp-callout-body">
+            For questions about the Instructor Checklist, the ReadyGO Instructor Tool, or assistance with any other aspects of course setup, contact Lauren Schwartz at <a href="mailto:lschwartz@salemcc.edu">lschwartz@salemcc.edu</a> or 856-351-2638.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Salem Community College — Faculty &amp; Adjunct Portal</span>
+  <span>Questions? <a href="mailto:lschwartz@salemcc.edu">lschwartz@salemcc.edu</a></span>
+</footer>
+
+<script>
+// Outer tabs
+document.querySelectorAll('.dp-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    document.querySelectorAll('.dp-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.dp-tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + target).classList.add('active');
+  });
+});
+
+// Inner sub-tabs — scoped per parent group
+document.querySelectorAll('.dp-subtab-buttons').forEach(group => {
+  group.querySelectorAll('.dp-subtab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.subtab;
+      // deactivate siblings only within this button group
+      group.querySelectorAll('.dp-subtab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // find sibling panels — next siblings after this button group
+      let el = group.nextElementSibling;
+      while (el) {
+        if (el.classList.contains('dp-subtab-panel')) {
+          el.classList.remove('active');
+          if (el.id === 'subtab-' + target) el.classList.add('active');
+        }
+        el = el.nextElementSibling;
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Useful Tools for Your Teaching — SCC Faculty Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --dp-primary: #016450;
+  --dp-primary-dark: #014a3b;
+  --dp-primary-light: #e6f0ed;
+  --dp-primary-mid: #c8ddd9;
+  --dp-accent: #000000;
+  --dp-gray: #B2B2B2;
+  --dp-graybg: #D9D9D9;
+  --dp-gray-text: #636363;
+  --dp-white: #ffffff;
+  --dp-body-bg: #f4f4f4;
+  --dp-border: #d0d0d0;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Lato', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: #1a1a1a; background: var(--dp-body-bg); }
+.site-nav { background: var(--dp-primary); padding: 0 1.5rem; display: flex; align-items: center; height: 48px; gap: 1.5rem; }
+.site-nav .brand { font-family: var(--font-heading); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.9); text-decoration: none; }
+.site-nav .nav-links { margin-left: auto; display: flex; }
+.site-nav .nav-links a { font-family: var(--font-heading); font-size: 11px; font-weight: 600; letter-spacing: 0.05em; color: rgba(255,255,255,0.75); text-decoration: none; padding: 0 0.9rem; height: 48px; display: flex; align-items: center; border-bottom: 3px solid transparent; transition: all 0.15s; }
+.site-nav .nav-links a:hover, .site-nav .nav-links a.active { color: #fff; border-bottom-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.08); }
+.dp-page { max-width: 960px; margin: 1.5rem auto; padding: 0 1.25rem; }
+.dp-header-block { background: var(--dp-white); border: 2px solid var(--dp-primary); border-radius: 4px; margin-bottom: 1.25rem; overflow: hidden; }
+.dp-header-top { background: var(--dp-primary); padding: 1.1rem 1.4rem 1rem; }
+.dp-header-pre { font-family: var(--font-heading); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.35); border-radius: 3px; display: inline-block; padding: 2px 8px; margin-bottom: 0.4rem; }
+.dp-header-title { font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: #fff; line-height: 1.2; }
+.dp-header-desc { background: #f9f9f9; border-top: 2px solid var(--dp-primary); padding: 0.9rem 1.4rem; font-size: 14.5px; color: var(--dp-gray-text); line-height: 1.65; }
+.dp-tabs-wrapper { display: flex; gap: 0; background: var(--dp-white); border: 1px solid var(--dp-border); border-radius: 4px; overflow: hidden; min-height: 500px; }
+.dp-tab-buttons { width: 220px; flex-shrink: 0; border-right: 1px solid var(--dp-border); background: #fafafa; display: flex; flex-direction: column; }
+.dp-tab-btn { font-family: var(--font-heading); font-size: 12.5px; font-weight: 600; color: var(--dp-gray-text); background: none; border: none; border-bottom: 1px solid var(--dp-border); border-left: 4px solid transparent; padding: 0.85rem 1rem 0.85rem 0.85rem; text-align: left; cursor: pointer; line-height: 1.35; transition: all 0.12s; }
+.dp-tab-btn:hover { background: var(--dp-primary-light); color: var(--dp-primary-dark); border-left-color: var(--dp-primary-mid); }
+.dp-tab-btn.active { background: var(--dp-primary-light); color: var(--dp-primary); border-left-color: var(--dp-primary); font-weight: 700; }
+.dp-tab-panels { flex: 1; padding: 1.5rem 1.75rem; overflow-y: auto; }
+.dp-tab-panel { display: none; }
+.dp-tab-panel.active { display: block; }
+.dp-panel-heading-display { font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--dp-primary-dark); border-bottom: 3px solid var(--dp-primary); padding-bottom: 0.5rem; margin-bottom: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
+.dp-panel-heading-display .panel-icon { width: 24px; height: 24px; background: var(--dp-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 11px; color: #fff; }
+.dp-resource-list { list-style: none; padding: 0; }
+.dp-resource-list li { padding: 0.7rem 0 0.7rem 1rem; border-left: 3px solid var(--dp-primary-mid); margin-bottom: 0.75rem; background: #fafafa; border-radius: 0 4px 4px 0; }
+.dp-resource-list li a { font-family: var(--font-heading); font-size: 13.5px; font-weight: 700; color: var(--dp-primary); text-decoration: none; }
+.dp-resource-list li a:hover { text-decoration: underline; }
+.dp-resource-list li p { font-size: 13.5px; color: var(--dp-gray-text); margin-top: 0.3rem; line-height: 1.6; }
+.dp-resource-list li .note { font-size: 12.5px; color: #888; margin-top: 0.25rem; font-style: italic; }
+.panel-intro { font-size: 14.5px; color: var(--dp-gray-text); margin-bottom: 1rem; line-height: 1.65; }
+.dp-callout { border: 1px solid var(--dp-primary); border-radius: 4px; overflow: hidden; margin-top: 1.25rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+.dp-callout-title { background: var(--dp-primary); padding: 0.5rem 1rem; font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; text-align: center; }
+.dp-callout-title .fa-leaf { margin-right: 0.4rem; }
+.dp-callout-body { padding: 0.9rem 1.1rem; font-size: 13.5px; color: var(--dp-gray-text); text-align: center; line-height: 1.6; }
+.dp-callout-body a { color: var(--dp-primary); font-weight: 700; text-decoration: none; }
+footer { max-width: 960px; margin: 1.25rem auto 0; padding: 1rem 1.25rem; font-size: 12.5px; color: #888; border-top: 1px solid var(--dp-border); display: flex; justify-content: space-between; }
+footer a { color: var(--dp-primary); text-decoration: none; }
+@media (max-width: 680px) { .dp-tabs-wrapper { flex-direction: column; } .dp-tab-buttons { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--dp-border); } .dp-tab-btn { border-bottom: none; border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; } .dp-tab-btn.active { border-left: none; border-bottom-color: var(--dp-primary); } .site-nav .nav-links { display: none; } }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand">SCC Faculty Portal</a>
+  <div class="nav-links">
+    <a href="instructor-checklist.html">Instructor Checklist</a>
+    <a href="oer-materials-v2.html">OER Materials</a>
+    <a href="teaching-tools-v2.html" class="active">Teaching Tools</a>
+  </div>
+</nav>
+
+<div class="dp-page">
+
+  <div class="dp-header-block">
+    <div class="dp-header-top">
+      <div class="dp-header-pre">Getting Started</div>
+      <div class="dp-header-title">Useful Tools for Your Teaching</div>
+    </div>
+    <div class="dp-header-desc">
+      The internet has countless tools available for students and teachers alike — here are some curated favorites for you (and your students) to try.
+    </div>
+  </div>
+
+  <div class="dp-tabs-wrapper">
+    <div class="dp-tab-buttons">
+      <button class="dp-tab-btn active" data-tab="writing">Writing &amp; Editing</button>
+      <button class="dp-tab-btn" data-tab="research">Research</button>
+      <button class="dp-tab-btn" data-tab="technology">Technology</button>
+      <button class="dp-tab-btn" data-tab="teaching">Teaching</button>
+      <button class="dp-tab-btn" data-tab="engagement">Student Engagement</button>
+    </div>
+
+    <div class="dp-tab-panels">
+
+      <div class="dp-tab-panel active" id="tab-writing">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-pen" aria-hidden="true"></i></span>
+          Writing &amp; Editing
+        </div>
+        <p class="panel-intro">Free and low-cost tools that can be integrated into composition instruction or shared directly with students:</p>
+        <ul class="dp-resource-list">
+          <li>
+            <a href="https://ellipsus.com/" target="_blank" rel="noopener">Ellipsus</a>
+            <p>A collaborative writing platform built specifically for creative and long-form writing, with connected drafts, real-time collaboration, and feedback tools in one place. Notable for its explicit no-generative-AI stance, which makes it a useful recommendation for students who want a distraction-free writing environment without AI suggestions baked in.</p>
+          </li>
+          <li>
+            <a href="https://www.grammarly.com/" target="_blank" rel="noopener">Grammarly</a>
+            <p>A writing assistant that checks grammar, clarity, tone, and style in real time. The free tier is fine for most student use cases.</p>
+            <p class="note">NOTE: Worth recommending with a caveat in your syllabus about over-reliance — it's most useful as a proofreading pass, not a substitute for revision.</p>
+          </li>
+          <li>
+            <a href="https://www.libreoffice.org/" target="_blank" rel="noopener">LibreOffice</a>
+            <p>A free, fully-featured alternative to Microsoft Office that students can install on any device. Useful to know about for students who don't have Office access at home.</p>
+          </li>
+          <li>
+            <a href="https://chromewebstore.google.com/detail/gptzero-ai-detection-writ/kgobeoibakoahbfnlficpmibdbkdchap" target="_blank" rel="noopener">GPTZero Origin</a>
+            <p>A Chrome extension from GPTZero that creates a real-time time-lapsed video of a document's creation while flagging suspected AI use. Useful for building AI awareness habits rather than enforcement.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dp-tab-panel" id="tab-research">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-search" aria-hidden="true"></i></span>
+          Research
+        </div>
+        <p class="panel-intro">Free and low-cost tools for supporting student research, source evaluation, and citation management:</p>
+        <ul class="dp-resource-list">
+          <li>
+            <a href="https://newslit.org/our-checkology-virtual-classroom/" target="_blank" rel="noopener">Checkology by the News Literacy Project</a>
+            <p>A free virtual classroom platform focused on media literacy and source evaluation. Particularly useful for research units — the modules on identifying misinformation and evaluating sources translate directly to composition skills.</p>
+          </li>
+          <li>
+            <a href="#" target="_blank">EBSCOhost at SCC</a>
+            <p>SCC's library database, available to all enrolled students. Contact the library for access instructions and subject-specific guides.</p>
+          </li>
+          <li>
+            <a href="https://www.zotero.org/" target="_blank" rel="noopener">Zotero</a>
+            <p>Free citation management tool that integrates with most browsers and word processors. Genuinely useful for research-heavy assignments and worth teaching as a transferable skill.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dp-tab-panel" id="tab-technology">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-laptop" aria-hidden="true"></i></span>
+          Technology
+        </div>
+        <p class="panel-intro">Tools for accessibility, multimedia, and course infrastructure:</p>
+        <ul class="dp-resource-list">
+          <li>
+            <a href="https://asuo-ai-labs.streamlit.app/Image_Accessibility" target="_blank" rel="noopener">ASU Online Image Accessibility Creator</a>
+            <p>A free AI-powered tool from Arizona State University that generates alt text for images from a simple file upload. Useful for accessibility remediation — if you're adding images to your Canvas course and need a quick starting point for alt text, this gets you most of the way there with minimal effort.</p>
+          </li>
+          <li>
+            <a href="https://www.instructure.com/canvas/studio" target="_blank" rel="noopener">Canvas Studio</a>
+            <p>SCC's built-in video tool inside Canvas, available to all instructors and students. Useful for video assignment submissions, instructor feedback via timestamped comments, and asynchronous discussion alternatives.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dp-tab-panel" id="tab-teaching">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></span>
+          Teaching
+        </div>
+        <p class="panel-intro">Resources for instructional design, active learning, and assessment:</p>
+        <ul class="dp-resource-list">
+          <li>
+            <a href="https://www.elearningdesign.org/new-generators" target="_blank" rel="noopener">eLearningDesign</a>
+            <p>A collection of free interactive activity generators — timelines, sorting activities, matching exercises, and more — that produce embeddable HTML with no account required. Low lift for adding interactivity to a Canvas page.</p>
+          </li>
+          <li>
+            <a href="https://mcgrawect.princeton.edu/toolkit/" target="_blank" rel="noopener">McGraw Center for Teaching &amp; Learning (Princeton) Digital Toolkit</a>
+            <p>A curated collection of teaching resources from Princeton's faculty development center, covering active learning, discussion facilitation, assessment design, and more. Institutional context aside, the resources are broadly applicable and freely available.</p>
+          </li>
+          <li>
+            <a href="https://cetli.upenn.edu/resources/teaching-online/assessment-exams/tools/" target="_blank" rel="noopener">UPenn CETLI Online Assessment Tools</a>
+            <p>A resource library from Penn's teaching center focused specifically on online and hybrid assessment strategies. Worth bookmarking for anyone rethinking how they assess writing in a digital environment.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dp-tab-panel" id="tab-engagement">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-users" aria-hidden="true"></i></span>
+          Student Engagement
+        </div>
+        <p class="panel-intro">Tools for collaborative learning, annotation, and peer interaction:</p>
+        <ul class="dp-resource-list">
+          <li>
+            <a href="https://padlet.com/" target="_blank" rel="noopener">Padlet</a>
+            <p>A flexible digital bulletin board tool for collaborative brainstorming, discussion, and sharing. Free tier has some limitations but is workable for most classroom uses. Good for low-stakes warm-ups, peer sharing, and visual organization activities.</p>
+          </li>
+          <li>
+            <a href="https://perusall.com/" target="_blank" rel="noopener">Perusall</a>
+            <p>A social annotation platform that lets students read and annotate texts collaboratively, with instructor visibility into engagement. Integrates with Canvas. Particularly well-suited for close reading assignments and building discussion around shared texts before class.</p>
+          </li>
+        </ul>
+
+        <div class="dp-callout">
+          <div class="dp-callout-title">
+            <i class="fas fa-leaf"></i> SCC Teaching Tip
+          </div>
+          <div class="dp-callout-body">
+            For help integrating any of these tools into your Canvas course, contact Lauren Schwartz at <a href="mailto:lschwartz@salemcc.edu">lschwartz@salemcc.edu</a> or 856-351-2638.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Salem Community College — Faculty &amp; Adjunct Portal</span>
+  <span>Questions? <a href="mailto:lschwartz@salemcc.edu">lschwartz@salemcc.edu</a></span>
+</footer>
+
+<script>
+const buttons = document.querySelectorAll('.dp-tab-btn');
+const panels = document.querySelectorAll('.dp-tab-panel');
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    buttons.forEach(b => b.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + target).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

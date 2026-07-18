@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finding and Using OER Materials — SCC Faculty Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ── BRAND TOKENS ── */
+:root {
+  --dp-primary: #016450;
+  --dp-primary-dark: #014a3b;
+  --dp-primary-light: #e6f0ed;
+  --dp-primary-mid: #c8ddd9;
+  --dp-accent: #000000;
+  --dp-gray: #B2B2B2;
+  --dp-graybg: #D9D9D9;
+  --dp-gray-text: #636363;
+  --dp-white: #ffffff;
+  --dp-body-bg: #f4f4f4;
+  --dp-border: #d0d0d0;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Lato', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: var(--dp-body-bg);
+}
+
+/* ── SITE NAV ── */
+.site-nav {
+  background: var(--dp-primary);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  gap: 1.5rem;
+}
+.site-nav .brand {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+}
+.site-nav .nav-links { margin-left: auto; display: flex; }
+.site-nav .nav-links a {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  padding: 0 0.9rem;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid transparent;
+  transition: all 0.15s;
+}
+.site-nav .nav-links a:hover,
+.site-nav .nav-links a.active {
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.08);
+}
+
+/* ── PAGE WRAPPER ── */
+.dp-page {
+  max-width: 960px;
+  margin: 1.5rem auto;
+  padding: 0 1.25rem;
+}
+
+/* ── DP HEADER BLOCK ── */
+.dp-header-block {
+  background: var(--dp-white);
+  border: 2px solid var(--dp-primary);
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+.dp-header-top {
+  background: var(--dp-primary);
+  padding: 1.1rem 1.4rem 1rem;
+  position: relative;
+}
+.dp-header-pre {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 3px;
+  display: inline-block;
+  padding: 2px 8px;
+  margin-bottom: 0.4rem;
+}
+.dp-header-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+.dp-header-desc {
+  background: #f9f9f9;
+  border-top: 2px solid var(--dp-primary);
+  padding: 0.9rem 1.4rem;
+  font-size: 14.5px;
+  color: var(--dp-gray-text);
+  line-height: 1.65;
+}
+
+/* ── BANNER IMAGE placeholder ── */
+.dp-banner {
+  background: var(--dp-primary-light);
+  border: 1px solid var(--dp-primary-mid);
+  border-radius: 6px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--dp-primary);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  gap: 0.5rem;
+}
+
+/* ── VERTICAL TABS LAYOUT ── */
+.dp-tabs-wrapper {
+  display: flex;
+  gap: 0;
+  background: var(--dp-white);
+  border: 1px solid var(--dp-border);
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+/* Tab buttons sidebar */
+.dp-tab-buttons {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--dp-border);
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+}
+.dp-tab-btn {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--dp-gray-text);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--dp-border);
+  border-left: 4px solid transparent;
+  padding: 0.85rem 1rem 0.85rem 0.85rem;
+  text-align: left;
+  cursor: pointer;
+  line-height: 1.35;
+  transition: all 0.12s;
+}
+.dp-tab-btn:hover {
+  background: var(--dp-primary-light);
+  color: var(--dp-primary-dark);
+  border-left-color: var(--dp-primary-mid);
+}
+.dp-tab-btn.active {
+  background: var(--dp-primary-light);
+  color: var(--dp-primary);
+  border-left-color: var(--dp-primary);
+  font-weight: 700;
+}
+
+/* Tab panels */
+.dp-tab-panels { flex: 1; padding: 1.5rem 1.75rem; overflow-y: auto; }
+.dp-tab-panel { display: none; }
+.dp-tab-panel.active { display: block; }
+
+.dp-panel-heading-display {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dp-primary-dark);
+  border-bottom: 3px solid var(--dp-primary);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.dp-panel-heading-display .panel-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--dp-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 11px;
+  color: #fff;
+}
+
+/* Resource list */
+.dp-resource-list { list-style: none; padding: 0; }
+.dp-resource-list li {
+  padding: 0.7rem 0 0.7rem 1rem;
+  border-left: 3px solid var(--dp-primary-mid);
+  margin-bottom: 0.75rem;
+  background: #fafafa;
+  border-radius: 0 4px 4px 0;
+}
+.dp-resource-list li a {
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--dp-primary);
+  text-decoration: none;
+}
+.dp-resource-list li a:hover { text-decoration: underline; }
+.dp-resource-list li p {
+  font-size: 13.5px;
+  color: var(--dp-gray-text);
+  margin-top: 0.3rem;
+  line-height: 1.6;
+}
+.dp-resource-list li .note {
+  font-size: 12.5px;
+  color: #888;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+/* Intro paragraph */
+.panel-intro {
+  font-size: 14.5px;
+  color: var(--dp-gray-text);
+  margin-bottom: 1rem;
+  line-height: 1.65;
+}
+
+/* Blockquote */
+.dp-blockquote {
+  border-left: 4px solid var(--dp-primary-mid);
+  background: #fafafa;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.1rem;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.7;
+  border-radius: 0 4px 4px 0;
+}
+.dp-blockquote cite {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 12.5px;
+  color: #888;
+  font-style: normal;
+}
+.dp-blockquote cite a { color: var(--dp-primary); text-decoration: none; }
+
+/* Callout box — SCC Teaching Tip */
+.dp-callout {
+  border: 1px solid var(--dp-primary);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 1.25rem;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.dp-callout-title {
+  background: var(--dp-primary);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+}
+.dp-callout-title .fa-leaf { margin-right: 0.4rem; }
+.dp-callout-body {
+  padding: 0.9rem 1.1rem;
+  font-size: 13.5px;
+  color: var(--dp-gray-text);
+  text-align: center;
+  line-height: 1.6;
+}
+.dp-callout-body a { color: var(--dp-primary); font-weight: 700; text-decoration: none; }
+
+/* CTA button */
+.dp-btn-wrap { text-align: center; margin: 1.25rem 0 0.5rem; }
+.dp-btn {
+  display: inline-block;
+  background: var(--dp-primary);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.6rem 1.4rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.dp-btn:hover { background: var(--dp-primary-dark); }
+
+/* FOOTER */
+footer {
+  max-width: 960px;
+  margin: 1.25rem auto 0;
+  padding: 1rem 1.25rem;
+  font-size: 12.5px;
+  color: #888;
+  border-top: 1px solid var(--dp-border);
+  display: flex;
+  justify-content: space-between;
+}
+footer a { color: var(--dp-primary); text-decoration: none; }
+
+@media (max-width: 680px) {
+  .dp-tabs-wrapper { flex-direction: column; }
+  .dp-tab-buttons { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--dp-border); }
+  .dp-tab-btn { border-bottom: none; border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+  .dp-tab-btn.active { border-left: none; border-bottom-color: var(--dp-primary); }
+  .site-nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="brand">SCC Faculty Portal</a>
+  <div class="nav-links">
+    <a href="instructor-checklist.html">Instructor Checklist</a>
+    <a href="oer-materials-v2.html" class="active">OER Materials</a>
+    <a href="teaching-tools-v2.html">Teaching Tools</a>
+  </div>
+</nav>
+
+<div class="dp-page">
+
+  <div class="dp-header-block">
+    <div class="dp-header-top">
+      <div class="dp-header-pre">Getting Started</div>
+      <div class="dp-header-title">Finding and Using OER Materials</div>
+    </div>
+    <div class="dp-header-desc">
+      Tired of textbooks? There's an ever-growing collection of open educational resources available for English composition courses. Browse this curated guide and share what works with your students — and your colleagues.
+    </div>
+  </div>
+
+  <div class="dp-tabs-wrapper">
+
+    <div class="dp-tab-buttons">
+      <button class="dp-tab-btn active" data-tab="about">About OER at SCC</button>
+      <button class="dp-tab-btn" data-tab="textbooks">Textbooks</button>
+      <button class="dp-tab-btn" data-tab="teaching">Teaching Materials</button>
+      <button class="dp-tab-btn" data-tab="tools">Online Tools</button>
+      <button class="dp-tab-btn" data-tab="resources">Online Resources</button>
+      <button class="dp-tab-btn" data-tab="video">Video &amp; Multimedia</button>
+      <button class="dp-tab-btn" data-tab="checklist">Using the OER Checklist</button>
+      <button class="dp-tab-btn" data-tab="start">Where Do I Start?</button>
+    </div>
+
+    <div class="dp-tab-panels">
+
+      <!-- About -->
+      <div class="dp-tab-panel active" id="tab-about">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-info" aria-hidden="true"></i></span>
+          About OER at SCC
+        </div>
+        <div class="dp-blockquote">
+          The idea behind Open Educational Resources (OER) is simple but powerful — educational materials made freely and legally available on the Internet for anyone to reuse, revise, remix and redistribute. These digital materials have the potential to give people everywhere equal access to our collective knowledge and provide many more people around the world with access to quality education by making lectures, books and curricula widely available on the Internet for little or no cost.
+          <cite>— <a href="https://hewlett.org/open-educational-resources-breaking-the-lockbox-on-education/" target="_blank" rel="noopener">The William and Flora Hewlett Foundation</a></cite>
+        </div>
+        <p class="panel-intro">OER is a critical part of our course offerings at SCC. As of Fall 2026, nearly all courses follow either the Cengage or OER model. <em>ENG101</em> and <em>ENG102</em> are unique in that faculty have now adopted the collaborative OER model outlined in this guide. This page walks you through finding and using your own materials to supplement what's provided in this course.</p>
+      </div>
+
+      <!-- Textbooks -->
+      <div class="dp-tab-panel" id="tab-textbooks">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-book" aria-hidden="true"></i></span>
+          Textbooks
+        </div>
+        <p class="panel-intro">There are many OER textbooks available for introductory composition. Here are the most reliable places to find them:</p>
+        <ul class="dp-resource-list">
+          <li>
+            <a href="https://commons.libretexts.org/" target="_blank" rel="noopener">LibreTexts</a>
+            <p>A massive, well-maintained open textbook platform covering virtually every academic discipline, built collaboratively by educators and freely adaptable for any course. Probably the single most practical starting point for faculty who want to move away from a commercial textbook without starting from scratch.</p>
+          </li>
+          <li>
+            <a href="https://oercommons.org/search?f.sublevel=community-college-lower-division&f.material_types=textbook&f.general_subject=composition-and-rhetoric" target="_blank" rel="noopener">OER Commons</a>
+            <p>A comprehensive digital library for finding, sharing, and collaborating on open educational resources across all subject areas and levels. What distinguishes it from other repositories is how searchable and filterable it is — which makes it genuinely useful rather than just a big pile of stuff.</p>
+          </li>
+          <li>
+            <a href="https://collection.bccampus.ca/concept/subject/communication-writing/" target="_blank" rel="noopener">BCcampus Open Collection</a>
+            <p>A curated collection of open textbooks developed and peer-reviewed by subject matter experts and evaluated specifically for accessibility and inclusivity. The Canadian origin is essentially irrelevant for most disciplines — the content travels well and the quality control is real.</p>
+          </li>
+          <li>
+            <a href="https://pressbooks.directory/" target="_blank" rel="noopener">Pressbooks</a>
+            <p>A self-publishing platform whose directory is a searchable catalog of open textbooks. A number of writing programs have published their own course materials here. Worth browsing for composition specifically, but rewards a more careful eye than LibreTexts or BCcampus.</p>
+          </li>
+          <li>
+            <a href="https://www.routledge.com/go/open-access-books-series" target="_blank" rel="noopener">Routledge Open Access</a>
+            <p>The open access arm of one of the world's largest academic publishers, covering an unusually wide range of humanities, social sciences, and STEM subjects. The one to reach for when a course is niche enough that other repositories don't have what you need.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Teaching Materials -->
+      <div class="dp-tab-panel" id="tab-teaching">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-chalkboard" aria-hidden="true"></i></span>
+          Teaching Materials
+        </div>
+        <p class="panel-intro">Looking for lesson plans, assignment prompts, discussion activities, or writing exercises you can drop directly into your course? These repositories are good places to start:</p>
+        <ul class="dp-resource-list">
+          <li>
+            <a href="https://www.merlot.org/merlot/index.htm" target="_blank" rel="noopener">MERLOT</a>
+            <p>A long-running peer-reviewed repository of open learning materials across disciplines, with a strong collection of humanities and writing-focused resources. Older interface, but the content depth is real.</p>
+          </li>
+          <li>
+            <a href="https://www.openwa.org/" target="_blank" rel="noopener">Open Washington</a>
+            <p>Washington state's OER initiative, with a strong collection of composition-specific teaching materials developed for community college contexts. Directly comparable to SCC's student population.</p>
+          </li>
+          <li>
+            <a href="https://writingcommons.org/" target="_blank" rel="noopener">The Writing Commons</a>
+            <p>An open-access resource built specifically for writing instruction, covering everything from rhetoric and research to grammar and style. More textbook-adjacent than repository, but useful for individual modules or readings.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Online Tools -->
+      <div class="dp-tab-panel" id="tab-tools">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-tools" aria-hidden="true"></i></span>
+          Online Tools
+        </div>
+        <p class="panel-intro">Free and low-cost tools that can be integrated into composition instruction or shared directly with students:</p>
+        <ul class="dp-resource-list">
+          <li>
+            <a href="https://owl.purdue.edu/" target="_blank" rel="noopener">Purdue OWL</a>
+            <p>The go-to reference for citation formatting, grammar, and writing process guidance. Most students have already encountered it — worth linking directly in your course rather than reinventing the wheel.</p>
+          </li>
+          <li>
+            <a href="https://www.grammarly.com/" target="_blank" rel="noopener">Grammarly</a>
+            <p>Free tier available to students; useful as a drafting aid with the caveat that over-reliance can undermine the revision skills the course is trying to build. Worth addressing in your syllabus if you recommend it.</p>
+          </li>
+          <li>
+            <a href="https://www.zotero.org/" target="_blank" rel="noopener">Zotero</a>
+            <p>Free citation management tool that integrates with most browsers and word processors. Genuinely useful for research-heavy assignments and worth teaching as a transferable skill.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Online Resources -->
+      <div class="dp-tab-panel" id="tab-resources">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-globe" aria-hidden="true"></i></span>
+          Online Resources
+        </div>
+        <p class="panel-intro">Curated reading and research resources appropriate for sharing directly with students or using as course readings:</p>
+        <ul class="dp-resource-list">
+          <li>
+            <a href="https://www.gutenberg.org/" target="_blank" rel="noopener">Project Gutenberg</a>
+            <p>Over 70,000 free ebooks in the public domain. Most useful for literary or historical primary sources rather than contemporary composition topics, but a reliable fallback for canonical texts.</p>
+          </li>
+          <li>
+            <a href="https://archive.org/" target="_blank" rel="noopener">Internet Archive</a>
+            <p>A massive digital library of books, periodicals, audio, and web archives. Useful for finding older editions, out-of-print texts, and historical documents. Quality and licensing vary — run anything you plan to assign through the OER checklist.</p>
+          </li>
+          <li>
+            <a href="https://www.jstor.org/open/" target="_blank" rel="noopener">JSTOR Open Access</a>
+            <p>JSTOR's freely available collection of peer-reviewed articles, book chapters, and primary sources. Good for modeling academic source use with students.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Video -->
+      <div class="dp-tab-panel" id="tab-video">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-film" aria-hidden="true"></i></span>
+          Video &amp; Multimedia
+        </div>
+        <p class="panel-intro">Video and multimedia resources for flipped instruction, supplemental viewing, or in-class use:</p>
+        <ul class="dp-resource-list">
+          <li>
+            <a href="https://www.youtube.com/education" target="_blank" rel="noopener">YouTube EDU</a>
+            <p>An obvious starting point, but search quality varies wildly. Look for content from university writing programs, library instruction teams, and established educational channels rather than generic "how to write an essay" results.</p>
+          </li>
+          <li>
+            <a href="https://ed.ted.com/" target="_blank" rel="noopener">TED &amp; TED-Ed</a>
+            <p>Short, well-produced talks on rhetoric, communication, language, and ideas across disciplines. Useful for discussion starters or as models of persuasive speaking. TED-Ed adds lesson scaffolding built around individual videos.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Checklist -->
+      <div class="dp-tab-panel" id="tab-checklist">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
+          Using the OER Checklist for Review
+        </div>
+        <p class="panel-intro">Not sure if a resource is worth assigning? Before adding materials to your course, run them through the <strong>OER &amp; Online Resource Evaluation Checklist</strong> — a quick, criterion-based tool that helps you evaluate sources for accuracy, accessibility, licensing, and course alignment before sharing them with students.</p>
+        <p class="panel-intro">The checklist takes about five minutes to complete and generates a summary you can save for your records.</p>
+        <div class="dp-btn-wrap">
+          <a href="https://elbies19.github.io/eng101-oer/oer-checklist.html" target="_blank" rel="noopener" class="dp-btn">Use the OER &amp; Online Resource Evaluation Checklist</a>
+        </div>
+      </div>
+
+      <!-- Start -->
+      <div class="dp-tab-panel" id="tab-start">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-compass" aria-hidden="true"></i></span>
+          I'd Like to Use OER — Where Do I Start?
+        </div>
+        <p class="panel-intro">Your fellow instructors have done a lot of the curation work for you in the Instructional Materials module. You're welcome — and encouraged — to browse the options in this guide and select materials that work best for your students. There are many delivery methods and modalities available in Canvas.</p>
+        <p class="panel-intro"><a href="mailto:LSchwartz@salemcc.edu" style="color:var(--dp-primary);font-weight:700;">Contact the Instructional Development Specialist</a> for assistance with incorporating OER materials into your course.</p>
+
+        <div class="dp-callout">
+          <div class="dp-callout-title">
+            <i class="fas fa-leaf"></i> SCC Teaching Tip
+          </div>
+          <div class="dp-callout-body">
+            For questions about OER, Canvas course setup, or assistance with any aspect of course design, contact Lauren Schwartz at <a href="mailto:lschwartz@salemcc.edu">lschwartz@salemcc.edu</a> or 856-351-2638.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end panels -->
+  </div><!-- end tabs wrapper -->
+
+</div><!-- end dp-page -->
+
+<footer>
+  <span>Salem Community College — Faculty &amp; Adjunct Portal</span>
+  <span>Questions? <a href="mailto:lschwartz@salemcc.edu">lschwartz@salemcc.edu</a></span>
+</footer>
+
+<script>
+const buttons = document.querySelectorAll('.dp-tab-btn');
+const panels = document.querySelectorAll('.dp-tab-panel');
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    buttons.forEach(b => b.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + target).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
