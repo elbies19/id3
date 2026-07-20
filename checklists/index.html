@@ -7,1484 +7,349 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* SCC Official Brand Colors — Branding Guidelines March 2026 */
-    --scc-green: #016450;
-    --scc-green-dark: #014d3d;
-    --scc-green-light: #e6f2ef;
-    --scc-green-mid: #c2ddd8;
-    --scc-dark-gray: #B2B2B2;
-    --scc-light-gray: #D9D9D9;
-    --white: #ffffff;
-    --black: #000000;
-
-    /* Functional UI colors (not brand — used only for score feedback states) */
-    --score-meets: #016450;
-    --score-meets-light: #e6f2ef;
-    --score-partial: #7a5800;
-    --score-partial-light: #fff8e6;
-    --score-fail: #8b1a1a;
-    --score-fail-light: #fdf0f0;
-
-    /* Aliases for layout */
-    --navy: var(--scc-green);
-    --slate: var(--scc-green-dark);
-    --cream: #f7faf9;
-    --gray-100: #f2f2f2;
-    --gray-200: var(--scc-light-gray);
-    --gray-400: var(--scc-dark-gray);
-    --gray-600: #555555;
-    --gray-800: #1a1a1a;
-    --green: var(--scc-green);
-    --green-light: var(--scc-green-light);
-    --amber: var(--score-partial);
-    --amber-light: var(--score-partial-light);
-    --red: var(--score-fail);
-    --red-light: var(--score-fail-light);
-
-    /* Typography — Montserrat as Gotham web substitute per SCC brand */
-    --font-display: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
-    --font-body: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
-    --font-mono: 'Courier New', monospace;
-    --radius: 4px;
-    --shadow: 0 2px 12px rgba(1,100,80,0.08);
-    --shadow-lg: 0 4px 24px rgba(1,100,80,0.14);
+    --scc-green:#016450;--scc-green-dark:#014d3d;--scc-green-light:#e6f2ef;--scc-green-mid:#c2ddd8;
+    --scc-dark-gray:#B2B2B2;--scc-light-gray:#D9D9D9;--white:#ffffff;
+    --score-partial:#7a5800;--score-partial-light:#fff8e6;--score-fail:#8b1a1a;--score-fail-light:#fdf0f0;
+    --cream:#f7faf9;--gray-100:#f2f2f2;--gray-200:#D9D9D9;--gray-400:#B2B2B2;--gray-600:#555555;--gray-800:#1a1a1a;
+    --green:#016450;--green-light:#e6f2ef;--amber:#7a5800;--amber-light:#fff8e6;--red:#8b1a1a;--red-light:#fdf0f0;
+    --font:'Montserrat',system-ui,sans-serif;--font-mono:'Courier New',monospace;
+    --radius:4px;--shadow:0 2px 12px rgba(1,100,80,0.08);--shadow-lg:0 4px 24px rgba(1,100,80,0.14);
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: var(--font-body);
-    background: var(--cream);
-    color: var(--gray-800);
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* Header */
-  header {
-    background: var(--scc-green);
-    padding: 2rem 1.5rem 1.5rem;
-    text-align: center;
-    border-bottom: 4px solid var(--scc-green-mid);
-  }
-
-  header .eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--scc-green-mid);
-    font-family: var(--font-body);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  header h1 {
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    color: var(--white);
-    font-weight: normal;
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
-  }
-
-  header p {
-    color: rgba(255,255,255,0.65);
-    font-size: 0.9rem;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-
-  /* Tab nav */
-  .tab-nav {
-    display: flex;
-    background: var(--scc-green-dark);
-    border-bottom: 3px solid var(--scc-green-mid);
-    overflow-x: auto;
-  }
-
-  .tab-btn {
-    flex: 1;
-    min-width: 160px;
-    padding: 1rem 1.5rem;
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.6);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    margin-bottom: -3px;
-    transition: color 0.2s, border-color 0.2s;
-  }
-
-  .tab-btn:hover { color: rgba(255,255,255,0.9); }
-  .tab-btn.active {
-    color: var(--white);
-    border-bottom-color: var(--scc-green-mid);
-    background: rgba(255,255,255,0.09);
-  }
-
-  /* Main layout */
-  main {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 2rem 1rem 4rem;
-  }
-
-  .checklist-panel { display: none; }
-  .checklist-panel.active { display: block; }
-
-  /* Panel intro */
-  .panel-intro {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-left: 4px solid var(--scc-green);
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow);
-  }
-
-  .panel-intro h2 {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    color: var(--scc-green);
-    margin-bottom: 0.4rem;
-  }
-
-  .panel-intro p {
-    font-size: 0.88rem;
-    color: var(--gray-600);
-    margin: 0;
-  }
-
-  /* Tool name input */
-  .tool-name-row {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .tool-name-row label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--scc-green);
-    display: block;
-    margin-bottom: 0.35rem;
-  }
-
-  .tool-name-row .field {
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .tool-name-row input {
-    width: 100%;
-    padding: 0.55rem 0.75rem;
-    border: 2px solid var(--gray-200);
-    border-radius: var(--radius);
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    background: var(--white);
-    color: var(--gray-800);
-    transition: border-color 0.2s;
-  }
-
-  .tool-name-row input:focus {
-    outline: none;
-    border-color: var(--scc-green);
-  }
-
-  /* Criterion card */
-  .criterion-card {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius);
-    margin-bottom: 1.25rem;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: box-shadow 0.2s;
-  }
-
-  .criterion-card:hover { box-shadow: var(--shadow-lg); }
-
-  .criterion-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.1rem 1.25rem 0.9rem;
-    border-bottom: 1px solid var(--gray-100);
-    background: rgba(26,39,68,0.02);
-  }
-
-  .criterion-number {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    color: var(--scc-green);
-    font-weight: 900;
-    line-height: 1;
-    min-width: 2rem;
-    padding-top: 0.1rem;
-  }
-
-  .criterion-title-block h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--scc-green);
-    margin-bottom: 0.2rem;
-  }
-
-  .criterion-title-block .criterion-question {
-    font-size: 0.85rem;
-    color: var(--gray-600);
-    font-style: italic;
-    line-height: 1.4;
-  }
-
-  /* Rating options */
-  .rating-options {
-    padding: 1rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .rating-option {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.65rem 0.85rem;
-    border-radius: var(--radius);
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-    background: var(--gray-100);
-  }
-
-  .rating-option:hover { background: var(--gray-200); }
-
-  .rating-option input[type="radio"] {
-    margin-top: 0.15rem;
-    accent-color: var(--scc-green);
-    flex-shrink: 0;
-  }
-
-  .rating-option .option-label {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-
-  .rating-option .score-badge {
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.1rem 0.4rem;
-    border-radius: 3px;
-    display: inline-block;
-    margin-bottom: 0.15rem;
-  }
-
-  .score-2 .score-badge { background: var(--scc-green-light); color: var(--scc-green); }
-  .score-1 .score-badge { background: var(--amber-light); color: var(--amber); }
-  .score-0 .score-badge { background: var(--red-light); color: var(--red); }
-
-  .rating-option .option-text {
-    font-size: 0.87rem;
-    color: var(--gray-600);
-    line-height: 1.4;
-  }
-
-  /* Selected states */
-  .rating-option.selected-2 {
-    background: var(--scc-green-light);
-    border-color: var(--scc-green);
-  }
-  .rating-option.selected-1 {
-    background: var(--amber-light);
-    border-color: var(--amber);
-  }
-  .rating-option.selected-0 {
-    background: var(--red-light);
-    border-color: var(--red);
-  }
-
-  /* Notes */
-  .criterion-notes {
-    padding: 0 1.25rem 1rem;
-  }
-
-  .criterion-notes label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--gray-400);
-    display: block;
-    margin-bottom: 0.3rem;
-  }
-
-  .criterion-notes textarea {
-    width: 100%;
-    padding: 0.5rem 0.65rem;
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    color: var(--gray-800);
-    resize: vertical;
-    min-height: 60px;
-    background: var(--cream);
-    transition: border-color 0.2s;
-  }
-
-  .criterion-notes textarea:focus {
-    outline: none;
-    border-color: var(--scc-green);
-    background: var(--white);
-  }
-
-  /* Source tag */
-  .source-tag {
-    font-size: 0.7rem;
-    color: var(--gray-400);
-    font-style: italic;
-    padding: 0 1.25rem 0.75rem;
-  }
-
-  /* Results panel */
-  .results-panel {
-    background: var(--white);
-    border: 2px solid var(--scc-green);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-top: 2rem;
-    box-shadow: var(--shadow-lg);
-  }
-
-  .results-panel h3 {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    color: var(--scc-green);
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--scc-green-mid);
-  }
-
-  .score-display {
-    text-align: center;
-    padding: 1rem 0 1.5rem;
-  }
-
-  .score-number {
-    font-family: var(--font-display);
-    font-size: 3.5rem;
-    font-weight: bold;
-    line-height: 1;
-  }
-
-  .score-label {
-    font-size: 0.85rem;
-    color: var(--gray-600);
-    margin-top: 0.25rem;
-  }
-
-  .score-bar-wrap {
-    background: var(--gray-100);
-    border-radius: 100px;
-    height: 12px;
-    margin: 0.75rem 0 1.5rem;
-    overflow: hidden;
-  }
-
-  .score-bar {
-    height: 100%;
-    border-radius: 100px;
-    transition: width 0.4s ease, background 0.3s;
-  }
-
-  /* Decision */
-  .decision-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .decision-option {
-    border: 2px solid var(--gray-200);
-    border-radius: var(--radius);
-    padding: 0.75rem;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--gray-600);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .decision-option:hover { border-color: var(--scc-green); color: var(--scc-green); }
-
-  .decision-option.selected-adopt {
-    border-color: var(--green);
-    background: var(--green-light);
-    color: var(--green);
-  }
-  .decision-option.selected-pilot {
-    border-color: var(--amber);
-    background: var(--amber-light);
-    color: var(--amber);
-  }
-  .decision-option.selected-pass {
-    border-color: var(--red);
-    background: var(--red-light);
-    color: var(--red);
-  }
-
-  .action-buttons {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    padding: 0.65rem 1.25rem;
-    border-radius: var(--radius);
-    font-family: var(--font-body);
-    font-size: 0.88rem;
-    font-weight: 700;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-  }
-
-  .btn-primary {
-    background: var(--scc-green);
-    color: var(--white);
-    border-color: var(--scc-green);
-  }
-  .btn-primary:hover { background: var(--scc-green-dark); border-color: var(--scc-green-dark); }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--scc-green);
-    border-color: var(--gray-200);
-  }
-  .btn-secondary:hover { border-color: var(--scc-green); background: var(--scc-green-light); }
-
-  /* Print output */
-  .print-output {
-    display: none;
-    background: var(--gray-100);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius);
-    padding: 1rem;
-    margin-top: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    white-space: pre-wrap;
-    color: var(--gray-800);
-    max-height: 300px;
-    overflow-y: auto;
-  }
-
-  .print-output.visible { display: block; }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 0.78rem;
-    color: var(--gray-400);
-    border-top: 1px solid var(--gray-200);
-    margin-top: 2rem;
-  }
-
-  footer a { color: var(--scc-green); text-decoration: none; }
-
-  @media (max-width: 600px) {
-    .criterion-header { flex-direction: column; gap: 0.5rem; }
-    .criterion-number { font-size: 1.1rem; }
-    .decision-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media print {
-    .tab-nav, .action-buttons, .btn, footer { display: none; }
-    .checklist-panel { display: block !important; }
-  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);background:var(--cream);color:var(--gray-800);line-height:1.6}
+  header{background:var(--scc-green);padding:2rem 1.5rem 1.5rem;text-align:center;border-bottom:4px solid var(--scc-green-mid)}
+  header .eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--scc-green-mid);font-weight:600;margin-bottom:.5rem}
+  header h1{font-size:clamp(1.4rem,4vw,2rem);color:#fff;font-weight:normal;line-height:1.2;margin-bottom:.5rem}
+  header p{color:rgba(255,255,255,.65);font-size:.9rem;max-width:560px;margin:0 auto}
+  .tab-nav{display:flex;background:var(--scc-green-dark);border-bottom:3px solid var(--scc-green-mid);overflow-x:auto}
+  .tab-btn{flex:1;min-width:160px;padding:1rem 1.5rem;background:none;border:none;color:rgba(255,255,255,.6);font-family:var(--font);font-size:.85rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-3px;transition:color .2s,border-color .2s}
+  .tab-btn:hover{color:rgba(255,255,255,.9)}
+  .tab-btn.active{color:#fff;border-bottom-color:var(--scc-green-mid);background:rgba(255,255,255,.09)}
+  main{max-width:860px;margin:0 auto;padding:2rem 1rem 4rem}
+  .checklist-panel{display:none}.checklist-panel.active{display:block}
+  .panel-intro{background:#fff;border:1px solid var(--gray-200);border-left:4px solid var(--scc-green);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:2rem;box-shadow:var(--shadow)}
+  .panel-intro h2{font-size:1.2rem;color:var(--scc-green);margin-bottom:.4rem}
+  .panel-intro p{font-size:.88rem;color:var(--gray-600)}
+  .tool-name-row{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+  .tool-name-row label{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--scc-green);display:block;margin-bottom:.35rem}
+  .tool-name-row .field{flex:1;min-width:200px}
+  .tool-name-row input{width:100%;padding:.55rem .75rem;border:2px solid var(--gray-200);border-radius:var(--radius);font-family:var(--font);font-size:.95rem;background:#fff;color:var(--gray-800);transition:border-color .2s}
+  .tool-name-row input:focus{outline:none;border-color:var(--scc-green)}
+  .criterion-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);margin-bottom:1.25rem;box-shadow:var(--shadow);overflow:hidden;transition:box-shadow .2s}
+  .criterion-card:hover{box-shadow:var(--shadow-lg)}
+  .criterion-header{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.25rem .9rem;border-bottom:1px solid var(--gray-100);background:rgba(26,39,68,.02)}
+  .criterion-number{font-size:1.5rem;color:var(--scc-green);font-weight:900;line-height:1;min-width:2rem;padding-top:.1rem}
+  .criterion-title-block h3{font-size:1rem;font-weight:700;color:var(--scc-green);margin-bottom:.2rem}
+  .criterion-question{font-size:.85rem;color:var(--gray-600);font-style:italic;line-height:1.4}
+  .rating-options{padding:1rem 1.25rem;display:flex;flex-direction:column;gap:.5rem}
+  .rating-option{display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .85rem;border-radius:var(--radius);border:2px solid transparent;cursor:pointer;transition:background .15s,border-color .15s;background:var(--gray-100)}
+  .rating-option:hover{background:var(--gray-200)}
+  .rating-option input[type=radio]{margin-top:.15rem;accent-color:var(--scc-green);flex-shrink:0}
+  .option-label{display:flex;flex-direction:column;gap:.1rem}
+  .score-badge{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:.1rem .4rem;border-radius:3px;display:inline-block;margin-bottom:.15rem}
+  .score-2 .score-badge{background:var(--scc-green-light);color:var(--scc-green)}
+  .score-1 .score-badge{background:var(--amber-light);color:var(--amber)}
+  .score-0 .score-badge{background:var(--red-light);color:var(--red)}
+  .option-text{font-size:.87rem;color:var(--gray-600);line-height:1.4}
+  .rating-option.selected-2{background:var(--scc-green-light);border-color:var(--scc-green)}
+  .rating-option.selected-1{background:var(--amber-light);border-color:var(--amber)}
+  .rating-option.selected-0{background:var(--red-light);border-color:var(--red)}
+  .criterion-notes{padding:0 1.25rem 1rem}
+  .criterion-notes label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-400);display:block;margin-bottom:.3rem}
+  .criterion-notes textarea{width:100%;padding:.5rem .65rem;border:1px solid var(--gray-200);border-radius:var(--radius);font-family:var(--font);font-size:.85rem;color:var(--gray-800);resize:vertical;min-height:60px;background:var(--cream);transition:border-color .2s}
+  .criterion-notes textarea:focus{outline:none;border-color:var(--scc-green);background:#fff}
+  .source-tag{font-size:.7rem;color:var(--gray-400);font-style:italic;padding:0 1.25rem .75rem}
+  .revised-tag{display:inline-block;background:var(--scc-green-light);color:var(--scc-green);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.1rem .5rem;border-radius:3px;border:1px solid var(--scc-green-mid);margin-left:.5rem;vertical-align:middle}
+  .results-panel{background:#fff;border:2px solid var(--scc-green);border-radius:var(--radius);padding:1.5rem;margin-top:2rem;box-shadow:var(--shadow-lg)}
+  .results-panel h3{font-size:1.1rem;color:var(--scc-green);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:2px solid var(--scc-green-mid)}
+  .score-display{text-align:center;padding:1rem 0 1.5rem}
+  .score-number{font-size:3.5rem;font-weight:bold;line-height:1}
+  .score-label{font-size:.85rem;color:var(--gray-600);margin-top:.25rem}
+  .score-bar-wrap{background:var(--gray-100);border-radius:100px;height:12px;margin:.75rem 0 1.5rem;overflow:hidden}
+  .score-bar{height:100%;border-radius:100px;transition:width .4s ease,background .3s}
+  .decision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.75rem;margin-bottom:1.5rem}
+  .decision-option{border:2px solid var(--gray-200);border-radius:var(--radius);padding:.75rem;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;font-size:.82rem;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.04em}
+  .decision-option:hover{border-color:var(--scc-green);color:var(--scc-green)}
+  .decision-option.selected-adopt{border-color:var(--green);background:var(--green-light);color:var(--green)}
+  .decision-option.selected-pilot{border-color:var(--amber);background:var(--amber-light);color:var(--amber)}
+  .decision-option.selected-pass{border-color:var(--red);background:var(--red-light);color:var(--red)}
+  .action-buttons{display:flex;gap:.75rem;flex-wrap:wrap}
+  .btn{padding:.65rem 1.25rem;border-radius:var(--radius);font-family:var(--font);font-size:.88rem;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .2s}
+  .btn-primary{background:var(--scc-green);color:#fff;border-color:var(--scc-green)}
+  .btn-primary:hover{background:var(--scc-green-dark)}
+  .btn-secondary{background:transparent;color:var(--scc-green);border-color:var(--gray-200)}
+  .btn-secondary:hover{border-color:var(--scc-green);background:var(--scc-green-light)}
+  .print-output{display:none;background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius);padding:1rem;margin-top:1rem;font-family:var(--font-mono);font-size:.78rem;white-space:pre-wrap;color:var(--gray-800);max-height:300px;overflow-y:auto}
+  .print-output.visible{display:block}
+  footer{text-align:center;padding:2rem 1rem;font-size:.78rem;color:var(--gray-400);border-top:1px solid var(--gray-200);margin-top:2rem}
+  footer a{color:var(--scc-green);text-decoration:none}
+  @media(max-width:600px){.criterion-header{flex-direction:column}.decision-grid{grid-template-columns:repeat(2,1fr)}}
+  @media print{.tab-nav,.action-buttons,footer{display:none}.checklist-panel{display:block!important}}
 </style>
 </head>
 <body>
-
 <header>
   <div class="eyebrow">Salem Community College · Instructional Development</div>
-  <h1>Tool & Resource Evaluation Checklists</h1>
+  <h1>Tool &amp; Resource Evaluation Checklists</h1>
   <p>Pre-adoption evaluation frameworks for digital tools and open educational resources.</p>
 </header>
-
 <nav class="tab-nav" role="tablist">
-  <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab('tools', this)">Online Tools</button>
-  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('oer', this)">OER & Online Resources</button>
+  <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab('tools',this)">Online Tools</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('oer',this)">OER &amp; Online Resources</button>
 </nav>
-
 <main>
 
-  <!-- ===== ONLINE TOOLS CHECKLIST ===== -->
-  <div id="panel-tools" class="checklist-panel active">
-
-    <div class="panel-intro">
-      <h2>Online Tools Evaluation Checklist</h2>
-      <p>For evaluating digital tools, applications, and platforms before adoption or recommendation to faculty. Rate each criterion 2 (meets), 1 (partially meets), or 0 (does not meet).</p>
-    </div>
-
-    <div class="tool-name-row">
-      <div class="field">
-        <label for="tool-name">Tool Name</label>
-        <input type="text" id="tool-name" placeholder="e.g., Pangram, GPTZero, Padlet…">
-      </div>
-      <div class="field">
-        <label for="tool-date">Date</label>
-        <input type="date" id="tool-date">
-      </div>
-      <div class="field">
-        <label for="tool-evaluator">Evaluator</label>
-        <input type="text" id="tool-evaluator" placeholder="Your name">
-      </div>
-    </div>
-
-    <!-- Criterion 1 -->
-    <div class="criterion-card" data-criterion="1" data-checklist="tools">
-      <div class="criterion-header">
-        <div class="criterion-number">1</div>
-        <div class="criterion-title-block">
-          <h3>Instructional Alignment & Value</h3>
-          <div class="criterion-question">Will we actually use this? Does it directly address an identified need, or is it a solution looking for a problem?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="tools-c1" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Directly addresses an identified institutional or instructional need; faculty have expressed interest or there is a clear use case</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="tools-c1" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Nice to have; useful in specific contexts but not broadly applicable or urgently needed</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="tools-c1" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Unclear use case; likely to go unused or requires significant behavioral change with minimal payoff</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Specific use cases, faculty conversations, context…"></textarea>
-      </div>
-      <div class="source-tag">Sources: EDUCAUSE Rubric (Functionality/Pedagogical Alignment); ASCCC AI Evaluation Framework (Pedagogical Alignment)</div>
-    </div>
-
-    <!-- Criterion 2 -->
-    <div class="criterion-card" data-criterion="2" data-checklist="tools">
-      <div class="criterion-header">
-        <div class="criterion-number">2</div>
-        <div class="criterion-title-block">
-          <h3>Affordability & Total Cost of Ownership</h3>
-          <div class="criterion-question">Can we afford this — now, and as we scale? What is the full cost picture?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="tools-c2" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Clean budget line item; pricing is transparent, sustainable long-term, and does not require significant admin advocacy to approve</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="tools-c1" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">On the edge of affordability; would require aligning with another department budget or building a case for admin approval</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="tools-c2" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Likely out of range for SCC's budget; hidden costs, per-seat pricing at scale, or unsustainable licensing model</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Pricing tier, per-seat cost, quote received, comparison to alternatives…"></textarea>
-      </div>
-      <div class="source-tag">Sources: Workforce EdTech (Affordability); Bovard (Access — cost); ASCCC (Cost and Licensing)</div>
-    </div>
-
-    <!-- Criterion 3 -->
-    <div class="criterion-card" data-criterion="3" data-checklist="tools">
-      <div class="criterion-header">
-        <div class="criterion-number">3</div>
-        <div class="criterion-title-block">
-          <h3>Redundancy Check</h3>
-          <div class="criterion-question">Do we already have something that does this? Is this filling a genuine gap or duplicating an existing tool?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="tools-c3" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Unique capability not currently addressed in our tool ecosystem; directly fills a documented gap or priority need</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="tools-c3" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Addresses a real gap but the problem is not urgent; existing tools could be leveraged with some adjustment</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="tools-c3" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">We already have a tool with this functionality that may simply need re-evaluation or better promotion</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="What tools are we already using? What's the gap this fills?"></textarea>
-      </div>
-      <div class="source-tag">Source: Institutional practice (not directly addressed in readings — added from active vendor evaluation experience)</div>
-    </div>
-
-    <!-- Criterion 4 -->
-    <div class="criterion-card" data-criterion="4" data-checklist="tools">
-      <div class="criterion-header">
-        <div class="criterion-number">4</div>
-        <div class="criterion-title-block">
-          <h3>Vendor Stability & Ownership</h3>
-          <div class="criterion-question">Who owns this? Is the company stable? What happens if they're acquired, pivot, or shut down?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="tools-c4" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Established vendor with transparent ownership, clear stewardship, stable business model, and no recent acquisition or pivot concerns</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="tools-c4" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Newer vendor or recent acquisition; some uncertainty about long-term direction but product currently functional and supported</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="tools-c4" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Ownership unclear, recent acquisition creates structural conflict of interest, or vendor has signaled product discontinuation or major pivot</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Ownership structure, acquisition history, business model, longevity signals…"></textarea>
-      </div>
-      <div class="source-tag">Sources: Jefferson College ROBOT Test (Owner); Workforce EdTech (Longevity); Bovard (Access — longevity)</div>
-    </div>
-
-    <!-- Criterion 5 -->
-    <div class="criterion-card" data-criterion="5" data-checklist="tools">
-      <div class="criterion-header">
-        <div class="criterion-number">5</div>
-        <div class="criterion-title-block">
-          <h3>Instructor Lift</h3>
-          <div class="criterion-question">How much does this add to a faculty member's job? Is the learning curve reasonable for adjuncts with limited time?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="tools-c5" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Minimal setup and learning curve; faculty can begin using effectively with one orientation session or brief documentation</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="tools-c5" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Manageable training burden; one PD session plus supplemental materials sufficient for most faculty</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="tools-c5" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Requires ongoing training, significant scaffolding, or advanced technical knowledge; likely to create barriers for adjunct faculty</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Training materials available? Support documentation quality? Adjunct-friendliness?"></textarea>
-      </div>
-      <div class="source-tag">Sources: Bovard (Workload & Time Management); EDUCAUSE (Teaching Presence/Facilitation); Workforce EdTech (User Support)</div>
-    </div>
-
-    <!-- Criterion 6 -->
-    <div class="criterion-card" data-criterion="6" data-checklist="tools">
-      <div class="criterion-header">
-        <div class="criterion-number">6</div>
-        <div class="criterion-title-block">
-          <h3>Strategic Plan Alignment</h3>
-          <div class="criterion-question">How does this connect to SCC's FY2025–2028 Strategic Priorities? Can we make the case to leadership?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="tools-c6" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Directly maps to two or more Strategic Plan priorities (e.g., Priority 4: Modern Workplace Skills + Priority 5: Innovation & Excellence)</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="tools-c6" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Connects to at least one Strategic Plan priority; case can be made but requires framing</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="tools-c6" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Minimal or forced connection to Strategic Plan; difficult to build an institutional case for adoption</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Which priority/goal does this map to? Who is the strategic sponsor?"></textarea>
-      </div>
-      <div class="source-tag">Source: SCC Strategic Plan FY2025–2028 (salemcc.edu/about-scc/strategic-plan) — institutional addition not in readings</div>
-    </div>
-
-    <!-- Criterion 7 -->
-    <div class="criterion-card" data-criterion="7" data-checklist="tools">
-      <div class="criterion-header">
-        <div class="criterion-number">7</div>
-        <div class="criterion-title-block">
-          <h3>Canvas Integration</h3>
-          <div class="criterion-question">Does this work seamlessly within our LMS, or does it create friction for students and faculty?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="tools-c7" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Full LTI integration with Canvas; single sign-on, gradebook sync, no separate account creation required</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="tools-c7" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Embeds via iframe or API with some configuration; functional but requires manual setup or additional scaffolding</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="tools-c7" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">External tool only; requires separate login, manual grade transfer, or creates navigation friction for students</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="LTI version, SSO support, gradebook sync, known configuration issues…"></textarea>
-      </div>
-      <div class="source-tag">Sources: EDUCAUSE Rubric (LMS Integration); Bovard (Workload — embeddability)</div>
-    </div>
-
-    <!-- Criterion 8 -->
-    <div class="criterion-card" data-criterion="8" data-checklist="tools">
-      <div class="criterion-header">
-        <div class="criterion-number">8</div>
-        <div class="criterion-title-block">
-          <h3>Student Learning Outcomes</h3>
-          <div class="criterion-question">How does this improve what students actually learn? Does it support higher-order thinking or just digitize busywork?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="tools-c8" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Directly supports Outcomes Assessment priorities; evidence of effectiveness at comparable institutions; supports higher-order cognitive tasks (analysis, evaluation, creation)</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="tools-c8" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Generally supports best practices in student learning; some evidence of effectiveness but limited to lower-order tasks or passive engagement</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="tools-c8" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Minimal demonstrable impact on student learning; overemphasizes engagement metrics over actual cognitive development</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Evidence of effectiveness, alignment with Outcomes Assessment Committee priorities, Bloom's level…"></textarea>
-      </div>
-      <div class="source-tag">Sources: Workforce EdTech (Proven Effectiveness); ASCCC (Pedagogical Alignment, Student Engagement); EDUCAUSE (Cognitive Presence)</div>
-    </div>
-
-    <!-- Results -->
-    <div class="results-panel" id="tools-results">
-      <h3>Evaluation Summary</h3>
-      <div class="score-display">
-        <div class="score-number" id="tools-score-num" style="color: var(--navy)">—</div>
-        <div class="score-label">out of 16 possible points</div>
-        <div class="score-bar-wrap">
-          <div class="score-bar" id="tools-score-bar" style="width:0%; background: var(--gray-400);"></div>
-        </div>
-        <div id="tools-score-label" style="font-size:0.88rem; color: var(--gray-600);">Rate the criteria above to see your score.</div>
-      </div>
-      <p style="font-size:0.85rem; color:var(--gray-600); margin-bottom:1rem; font-weight:600;">Recommendation:</p>
-      <div class="decision-grid">
-        <div class="decision-option" id="tools-dec-adopt" onclick="setDecision('tools','adopt')">✓ Adopt</div>
-        <div class="decision-option" id="tools-dec-pilot" onclick="setDecision('tools','pilot')">◎ Pilot First</div>
-        <div class="decision-option" id="tools-dec-support" onclick="setDecision('tools','support')">△ Adopt with Support</div>
-        <div class="decision-option" id="tools-dec-pass" onclick="setDecision('tools','pass')">✕ Do Not Adopt</div>
-      </div>
-      <div class="action-buttons">
-        <button class="btn btn-primary" onclick="generateOutput('tools')">Generate Summary Text</button>
-        <button class="btn btn-secondary" onclick="resetChecklist('tools')">Reset</button>
-      </div>
-      <div class="print-output" id="tools-output"></div>
-    </div>
-
+<!-- ONLINE TOOLS -->
+<div id="panel-tools" class="checklist-panel active">
+  <div class="panel-intro">
+    <h2>Online Tools Evaluation Checklist</h2>
+    <p>For evaluating digital tools, applications, and platforms before adoption or recommendation to faculty. Rate each criterion 2 (meets), 1 (partially meets), or 0 (does not meet).</p>
   </div>
-
-  <!-- ===== OER CHECKLIST ===== -->
-  <div id="panel-oer" class="checklist-panel">
-
-    <div class="panel-intro">
-      <h2>OER & Online Resources Evaluation Checklist</h2>
-      <p>For evaluating open educational resources, articles, videos, and online course materials before sharing with faculty or including in course design. Rate each criterion 2 (meets), 1 (partially meets), or 0 (does not meet).</p>
-    </div>
-
-    <div class="tool-name-row">
-      <div class="field">
-        <label for="oer-name">Resource Title</label>
-        <input type="text" id="oer-name" placeholder="Title of resource…">
-      </div>
-      <div class="field">
-        <label for="oer-date">Date</label>
-        <input type="date" id="oer-date">
-      </div>
-      <div class="field">
-        <label for="oer-evaluator">Evaluator</label>
-        <input type="text" id="oer-evaluator" placeholder="Your name">
-      </div>
-    </div>
-
-    <!-- OER Criterion 1 -->
-    <div class="criterion-card" data-criterion="1" data-checklist="oer">
-      <div class="criterion-header">
-        <div class="criterion-number">1</div>
-        <div class="criterion-title-block">
-          <h3>Authority & Credibility</h3>
-          <div class="criterion-question">Who created this and why should we trust them? Is the author or organization clearly identified and credible?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="oer-c1" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Author or organization clearly identified; credentials or institutional affiliation verifiable; published by a recognized academic, government, or professional body</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="oer-c1" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Author identified but credentials are unclear; organization is legitimate but not a primary authority on the subject</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="oer-c1" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">No clear author or institutional affiliation; anonymous webpage; no way to verify credentials</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Author name, credentials, publishing organization…"></textarea>
-      </div>
-      <div class="source-tag">Sources: ASCCC (Ethical Use/Transparency); Workforce EdTech (Proven Effectiveness)</div>
-    </div>
-
-    <!-- OER Criterion 2 -->
-    <div class="criterion-card" data-criterion="2" data-checklist="oer">
-      <div class="criterion-header">
-        <div class="criterion-number">2</div>
-        <div class="criterion-title-block">
-          <h3>Accuracy & Evidence</h3>
-          <div class="criterion-question">Are the claims accurate and supported by evidence? Has this been reviewed or verified?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="oer-c2" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Claims supported by verifiable evidence, citations, or data; peer-reviewed or editorially vetted; statistics and definitions accurate when checked</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="oer-c2" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Generally accurate but some claims unverified or unsupported; anecdotal evidence used where data would be stronger</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="oer-c2" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Inaccurate, misleading, or unsupported claims; no citations or evidence provided; contradicts established knowledge in the field</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Specific claims checked, citation quality, peer review status…"></textarea>
-      </div>
-      <div class="source-tag">Sources: Jefferson College VALID-AI (Accuracy Check); ASCCC (Bias and Fairness)</div>
-    </div>
-
-    <!-- OER Criterion 3 -->
-    <div class="criterion-card" data-criterion="3" data-checklist="oer">
-      <div class="criterion-header">
-        <div class="criterion-number">3</div>
-        <div class="criterion-title-block">
-          <h3>Currency</h3>
-          <div class="criterion-question">Is this current enough for the subject? In fast-moving fields, when was this last updated?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="oer-c3" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Recently published or updated; all links functional; appropriate for the rate of change in this subject area (a timeless concept vs. an AI tool may have different currency needs)</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="oer-c3" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Somewhat dated but core content remains valid; some links may be broken; foundational enough that age is not disqualifying</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="oer-c3" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Outdated for the subject; superseded by newer research or standards; broken links or references to discontinued tools or policies</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Publication/update date, rate of change in this field, broken links found…"></textarea>
-      </div>
-      <div class="source-tag">Sources: Workforce EdTech (Longevity); Bovard (Workload — sustainability)</div>
-    </div>
-
-    <!-- OER Criterion 4 -->
-    <div class="criterion-card" data-criterion="4" data-checklist="oer">
-      <div class="criterion-header">
-        <div class="criterion-number">4</div>
-        <div class="criterion-title-block">
-          <h3>Relevance & Course Alignment</h3>
-          <div class="criterion-question">Does this match the course outcomes, student level, and learning context where it will be used?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="oer-c4" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Directly supports specific course outcomes; appropriate reading level and complexity for the intended student population; could be assigned as-is</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="oer-c4" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Relevant to the subject but requires framing, excerpting, or scaffolding to be useful; level mismatch (too advanced or too introductory)</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="oer-c4" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Does not align with course outcomes or student needs; significant level or scope mismatch; requires too much adaptation to be worthwhile</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Which course/outcome does this support? Reading level? Adaptation needed?"></textarea>
-      </div>
-      <div class="source-tag">Sources: EDUCAUSE (Instructional Alignment); ASCCC (Pedagogical Alignment)</div>
-    </div>
-
-    <!-- OER Criterion 5 -->
-    <div class="criterion-card" data-criterion="5" data-checklist="oer">
-      <div class="criterion-header">
-        <div class="criterion-number">5</div>
-        <div class="criterion-title-block">
-          <h3>Purpose, Perspective & Bias</h3>
-          <div class="criterion-question">Who made this and why? What perspective is centered, and what's missing? Is there a conflict of interest?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="oer-c5" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Purpose is clear and transparent; multiple perspectives represented or bias is explicitly acknowledged; no undisclosed conflict of interest</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="oer-c5" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Some bias present but usable with faculty framing; vendor-created resource that is informative but promotional; perspective gaps identifiable</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="oer-c5" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Significant undisclosed bias or conflict of interest; single perspective presented as universal; promotional content disguised as educational</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Who funded/created this? What perspective is centered? What's missing?"></textarea>
-      </div>
-      <div class="source-tag">Sources: Jefferson College VALID-AI (Diversity and Bias); ASCCC (Bias and Fairness)</div>
-    </div>
-
-    <!-- OER Criterion 6 -->
-    <div class="criterion-card" data-criterion="6" data-checklist="oer">
-      <div class="criterion-header">
-        <div class="criterion-number">6</div>
-        <div class="criterion-title-block">
-          <h3>Accessibility & Usability</h3>
-          <div class="criterion-question">Can all students access and use this? Does it meet accessibility standards and work across devices?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="oer-c6" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">WCAG-compliant or clearly accessible; readable formatting, alt text, captions where needed; works on mobile; no paywall or account required</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="oer-c6" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Mostly accessible but with some gaps; may require adaptation (e.g., adding captions, reformatting) before sharing widely</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="oer-c6" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Significant accessibility barriers; paywalled; poor scan quality; no captions on video; inaccessible to screen readers</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="Accessibility issues found, device compatibility, paywall status…"></textarea>
-      </div>
-      <div class="source-tag">Sources: EDUCAUSE (Accessibility Standards, UDL); Bovard (Access — ADA); ASCCC (Support for Diverse Needs)</div>
-    </div>
-
-    <!-- OER Criterion 7 -->
-    <div class="criterion-card" data-criterion="7" data-checklist="oer">
-      <div class="criterion-header">
-        <div class="criterion-number">7</div>
-        <div class="criterion-title-block">
-          <h3>Open Licensing & Permissions</h3>
-          <div class="criterion-question">Can we actually use, share, or adapt this? What does the license allow?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="oer-c7" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Clear Creative Commons license (CC-BY or equivalent); can be freely shared, linked, and adapted; no hidden platform fees or redistribution restrictions</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="oer-c7" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Free to view and link but not to download, remix, or redistribute; license unclear but usage appears permitted in educational contexts</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="oer-c7" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Copyright-restricted; requires institutional subscription or purchase; redistribution or adaptation not permitted</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="License type, usage restrictions, adaptation rights…"></textarea>
-      </div>
-      <div class="source-tag">Sources: EDUCAUSE (Privacy, Data Protection & Rights — IP); Bovard (Privacy & IP)</div>
-    </div>
-
-    <!-- OER Criterion 8 -->
-    <div class="criterion-card" data-criterion="8" data-checklist="oer">
-      <div class="criterion-header">
-        <div class="criterion-number">8</div>
-        <div class="criterion-title-block">
-          <h3>Adaptability & Practical Usability</h3>
-          <div class="criterion-question">Can this be revised, downloaded, or shared in useful formats? Is it truly no-cost for students?</div>
-        </div>
-      </div>
-      <div class="rating-options">
-        <label class="rating-option score-2">
-          <input type="radio" name="oer-c8" value="2">
-          <div class="option-label">
-            <span class="score-badge">2 — Meets</span>
-            <span class="option-text">Editable source files available; downloadable in multiple formats; printable; no student-facing cost; can be remixed for institutional context</span>
-          </div>
-        </label>
-        <label class="rating-option score-1">
-          <input type="radio" name="oer-c8" value="1">
-          <div class="option-label">
-            <span class="score-badge">1 — Partial</span>
-            <span class="option-text">Useful as-is but limited adaptability; downloadable but not easily editable; minor costs to students for premium features</span>
-          </div>
-        </label>
-        <label class="rating-option score-0">
-          <input type="radio" name="oer-c8" value="0">
-          <div class="option-label">
-            <span class="score-badge">0 — Does Not Meet</span>
-            <span class="option-text">Not downloadable or adaptable; locked to a platform; hidden student costs; cannot be localized for SCC context</span>
-          </div>
-        </label>
-      </div>
-      <div class="criterion-notes">
-        <label>Notes</label>
-        <textarea placeholder="File formats available, student cost, remix potential…"></textarea>
-      </div>
-      <div class="source-tag">Sources: EDUCAUSE (Archiving, Saving & Exporting); Bovard (Privacy & IP — archival); Workforce EdTech (Affordability)</div>
-    </div>
-
-    <!-- OER Results -->
-    <div class="results-panel" id="oer-results">
-      <h3>Evaluation Summary</h3>
-      <div class="score-display">
-        <div class="score-number" id="oer-score-num" style="color: var(--navy)">—</div>
-        <div class="score-label">out of 16 possible points</div>
-        <div class="score-bar-wrap">
-          <div class="score-bar" id="oer-score-bar" style="width:0%; background: var(--gray-400);"></div>
-        </div>
-        <div id="oer-score-label" style="font-size:0.88rem; color: var(--gray-600);">Rate the criteria above to see your score.</div>
-      </div>
-      <p style="font-size:0.85rem; color:var(--gray-600); margin-bottom:1rem; font-weight:600;">Recommendation:</p>
-      <div class="decision-grid">
-        <div class="decision-option" id="oer-dec-use" onclick="setDecision('oer','use')">✓ Use As-Is</div>
-        <div class="decision-option" id="oer-dec-adapt" onclick="setDecision('oer','adapt')">◎ Use with Adaptation</div>
-        <div class="decision-option" id="oer-dec-supp" onclick="setDecision('oer','supp')">△ Supplemental Only</div>
-        <div class="decision-option" id="oer-dec-pass" onclick="setDecision('oer','pass')">✕ Do Not Use</div>
-      </div>
-      <div class="action-buttons">
-        <button class="btn btn-primary" onclick="generateOutput('oer')">Generate Summary Text</button>
-        <button class="btn btn-secondary" onclick="resetChecklist('oer')">Reset</button>
-      </div>
-      <div class="print-output" id="oer-output"></div>
-    </div>
-
+  <div class="tool-name-row">
+    <div class="field"><label for="tool-name">Tool Name</label><input type="text" id="tool-name" placeholder="e.g., Pangram, GPTZero, Padlet…"></div>
+    <div class="field"><label for="tool-date">Date</label><input type="date" id="tool-date"></div>
+    <div class="field"><label for="tool-evaluator">Evaluator</label><input type="text" id="tool-evaluator" placeholder="Your name"></div>
   </div>
+  <div class="criterion-card" data-criterion="1" data-checklist="tools">
+    <div class="criterion-header"><div class="criterion-number">1</div><div class="criterion-title-block"><h3>Instructional Alignment &amp; Value</h3><div class="criterion-question">Will we actually use this? Does it directly address an identified need, or is it a solution looking for a problem?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="tools-c1" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Directly addresses an identified institutional or instructional need; faculty have expressed interest or there is a clear use case</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="tools-c1" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Nice to have; useful in specific contexts but not broadly applicable or urgently needed</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="tools-c1" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Unclear use case; likely to go unused or requires significant behavioral change with minimal payoff</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Specific use cases, faculty conversations, context…"></textarea></div>
+    <div class="source-tag">Sources: EDUCAUSE Rubric (Functionality/Pedagogical Alignment); ASCCC AI Evaluation Framework (Pedagogical Alignment)</div>
+  </div>
+  <div class="criterion-card" data-criterion="2" data-checklist="tools">
+    <div class="criterion-header"><div class="criterion-number">2</div><div class="criterion-title-block"><h3>Affordability &amp; Total Cost of Ownership</h3><div class="criterion-question">Can we afford this — now, and as we scale? What is the full cost picture?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="tools-c2" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Clean budget line item; pricing is transparent, sustainable long-term, and does not require significant admin advocacy to approve</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="tools-c2" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">On the edge of affordability; would require aligning with another department budget or building a case for admin approval</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="tools-c2" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Likely out of range for SCC’s budget; hidden costs, per-seat pricing at scale, or unsustainable licensing model</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Pricing tier, per-seat cost, quote received, comparison to alternatives…"></textarea></div>
+    <div class="source-tag">Sources: Workforce EdTech (Affordability); Bovard (Access — cost); ASCCC (Cost and Licensing)</div>
+  </div>
+  <div class="criterion-card" data-criterion="3" data-checklist="tools">
+    <div class="criterion-header"><div class="criterion-number">3</div><div class="criterion-title-block"><h3>Redundancy Check</h3><div class="criterion-question">Do we already have something that does this? Is this filling a genuine gap or duplicating an existing tool?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="tools-c3" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Unique capability not currently addressed in our tool ecosystem; directly fills a documented gap or priority need</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="tools-c3" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Addresses a real gap but the problem is not urgent; existing tools could be leveraged with some adjustment</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="tools-c3" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">We already have a tool with this functionality that may simply need re-evaluation or better promotion</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="What tools are we already using? What’s the gap this fills?"></textarea></div>
+    <div class="source-tag">Source: Institutional practice — added from active vendor evaluation experience</div>
+  </div>
+  <div class="criterion-card" data-criterion="4" data-checklist="tools">
+    <div class="criterion-header"><div class="criterion-number">4</div><div class="criterion-title-block"><h3>Vendor Stability &amp; Ownership</h3><div class="criterion-question">Who owns this? Is the company stable? What happens if they’re acquired, pivot, or shut down?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="tools-c4" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Established vendor with transparent ownership, clear stewardship, stable business model, and no recent acquisition or pivot concerns</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="tools-c4" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Newer vendor or recent acquisition; some uncertainty about long-term direction but product currently functional and supported</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="tools-c4" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Ownership unclear, recent acquisition creates structural conflict of interest, or vendor has signaled product discontinuation or major pivot</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Ownership structure, acquisition history, business model, longevity signals…"></textarea></div>
+    <div class="source-tag">Sources: Jefferson College ROBOT Test (Owner); Workforce EdTech (Longevity); Bovard (Access — longevity)</div>
+  </div>
+  <div class="criterion-card" data-criterion="5" data-checklist="tools">
+    <div class="criterion-header"><div class="criterion-number">5</div><div class="criterion-title-block"><h3>Instructor Lift</h3><div class="criterion-question">How much does this add to a faculty member’s job? Is the learning curve reasonable for adjuncts with limited time?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="tools-c5" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Minimal setup and learning curve; faculty can begin using effectively with one orientation session or brief documentation</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="tools-c5" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Manageable training burden; one PD session plus supplemental materials sufficient for most faculty</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="tools-c5" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Requires ongoing training, significant scaffolding, or advanced technical knowledge; likely to create barriers for adjunct faculty</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Training materials available? Support documentation quality? Adjunct-friendliness?"></textarea></div>
+    <div class="source-tag">Sources: Bovard (Workload &amp; Time Management); EDUCAUSE (Teaching Presence/Facilitation); Workforce EdTech (User Support)</div>
+  </div>
+  <div class="criterion-card" data-criterion="6" data-checklist="tools">
+    <div class="criterion-header"><div class="criterion-number">6</div><div class="criterion-title-block"><h3>Strategic Plan Alignment</h3><div class="criterion-question">How does this connect to SCC’s FY2025–2028 Strategic Priorities? Can we make the case to leadership?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="tools-c6" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Directly maps to two or more Strategic Plan priorities (e.g., Priority 4: Modern Workplace Skills + Priority 5: Innovation &amp; Excellence)</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="tools-c6" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Connects to at least one Strategic Plan priority; case can be made but requires framing</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="tools-c6" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Minimal or forced connection to Strategic Plan; difficult to build an institutional case for adoption</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Which priority/goal does this map to? Who is the strategic sponsor?"></textarea></div>
+    <div class="source-tag">Source: SCC Strategic Plan FY2025–2028 — institutional addition not in readings</div>
+  </div>
+  <div class="criterion-card" data-criterion="7" data-checklist="tools">
+    <div class="criterion-header"><div class="criterion-number">7</div><div class="criterion-title-block"><h3>Canvas Integration <span class="revised-tag">Revised</span></h3><div class="criterion-question">Does this work seamlessly within our LMS (Learning Management System), or does it create friction for students and faculty? Canvas is SCC’s LMS.</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="tools-c7" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Full LTI integration — meaning the tool launches directly inside Canvas with a single click, no separate login required, and grades can sync automatically to the Canvas gradebook</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="tools-c7" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Embeds inside a Canvas page via iframe (a window-within-a-page) or connects via API (a data bridge between systems); functional but requires some manual configuration or faculty guidance to set up</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="tools-c7" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">External tool only — students and faculty must leave Canvas, create a separate account, and manually transfer any work or grades back; adds meaningful friction to the course workflow</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="LTI version, SSO support, gradebook sync, known configuration issues…"></textarea></div>
+    <div class="source-tag">Sources: EDUCAUSE Rubric (LMS Integration); Bovard (Workload — embeddability) | Revised: added plain-language glosses on LTI, iframe, and API terminology per peer feedback (Week 1 discussion)</div>
+  </div>
+  <div class="criterion-card" data-criterion="8" data-checklist="tools">
+    <div class="criterion-header"><div class="criterion-number">8</div><div class="criterion-title-block"><h3>Student Learning Outcomes <span class="revised-tag">Revised</span></h3><div class="criterion-question">How does this improve what students actually learn? Does it support higher-order thinking or just digitize busywork? Does it serve all students equitably?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="tools-c8" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Directly supports Outcomes Assessment priorities; evidence of effectiveness at comparable institutions; supports higher-order cognitive tasks (analysis, evaluation, creation per Bloom’s Revised Taxonomy); designed with Universal Design for Learning (UDL) principles and diverse learners in mind</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="tools-c8" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Generally supports best practices in student learning; some evidence of effectiveness but limited to lower-order tasks or passive engagement; limited evidence of equitable outcomes across diverse student populations</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="tools-c8" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Minimal demonstrable impact on student learning; overemphasizes engagement metrics over cognitive development; no evidence of equitable outcomes or consideration of diverse learners</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Evidence of effectiveness, Bloom’s level, UDL considerations, equity data if available…"></textarea></div>
+    <div class="source-tag">Sources: Workforce EdTech (Proven Effectiveness); ASCCC (Pedagogical Alignment, Student Engagement); EDUCAUSE (Cognitive Presence) | Revised: added explicit UDL framework reference and equity/diverse learners language — self-identified gap in Week 1 reflection</div>
+  </div>
+  <div class="criterion-card" data-criterion="9" data-checklist="tools">
+    <div class="criterion-header"><div class="criterion-number">9</div><div class="criterion-title-block"><h3>Equity, Belonging &amp; Representation <span class="revised-tag">New</span></h3><div class="criterion-question">Does this tool reflect and serve our student population? Are diverse voices and perspectives centered in its design, content, and use cases?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="tools-c9" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Tool design reflects diverse user populations; vendor demonstrates a verifiable commitment to equity and accessibility; use cases and examples represent a range of disciplines, backgrounds, and student contexts; no documented evidence of algorithmic bias or discriminatory outcomes</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="tools-c9" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Some consideration of diverse users but not comprehensive; equity commitment stated but not demonstrated with evidence; known bias concerns acknowledged but not yet fully addressed by vendor</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="tools-c9" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Tool design does not reflect diverse user populations; evidence of algorithmic bias or discriminatory outcomes; no stated commitment to equity or accessibility; use cases skew toward narrow demographics</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Vendor equity statements, bias audit results, representation in examples/use cases, fit for SCC student population…"></textarea></div>
+    <div class="source-tag">Sources: ASCCC (Bias and Fairness, Support for Diverse Needs); EDUCAUSE (UDL, Accessibility Standards) | Added: self-identified gap noted in Week 1 reflection; reinforced by peer feedback in Week 1 discussion</div>
+  </div>
+  <div class="results-panel" id="tools-results">
+    <h3>Evaluation Summary</h3>
+    <div class="score-display">
+      <div class="score-number" id="tools-score-num" style="color:var(--scc-green)">—</div>
+      <div class="score-label">out of 18 possible points</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="tools-score-bar" style="width:0%;background:var(--gray-400)"></div></div>
+      <div id="tools-score-label" style="font-size:.88rem;color:var(--gray-600)">Rate the criteria above to see your score.</div>
+    </div>
+    <p style="font-size:.85rem;color:var(--gray-600);margin-bottom:1rem;font-weight:600">Recommendation:</p>
+    <div class="decision-grid">
+      <div class="decision-option" id="tools-dec-adopt" onclick="setDecision('tools','adopt')">✓ Adopt</div>
+      <div class="decision-option" id="tools-dec-pilot" onclick="setDecision('tools','pilot')">◎ Pilot First</div>
+      <div class="decision-option" id="tools-dec-support" onclick="setDecision('tools','support')">△ Adopt with Support</div>
+      <div class="decision-option" id="tools-dec-pass" onclick="setDecision('tools','pass')">✕ Do Not Adopt</div>
+    </div>
+    <div class="action-buttons">
+      <button class="btn btn-primary" onclick="generateOutput('tools')">Generate Summary Text</button>
+      <button class="btn btn-secondary" onclick="resetChecklist('tools')">Reset</button>
+    </div>
+    <div class="print-output" id="tools-output"></div>
+  </div>
+</div>
+
+<!-- OER -->
+<div id="panel-oer" class="checklist-panel">
+  <div class="panel-intro">
+    <h2>OER &amp; Online Resources Evaluation Checklist</h2>
+    <p>For evaluating open educational resources, articles, videos, and online course materials before sharing with faculty or including in course design. Rate each criterion 2 (meets), 1 (partially meets), or 0 (does not meet).</p>
+  </div>
+  <div class="tool-name-row">
+    <div class="field"><label for="oer-name">Resource Title</label><input type="text" id="oer-name" placeholder="Title of resource…"></div>
+    <div class="field"><label for="oer-date">Date</label><input type="date" id="oer-date"></div>
+    <div class="field"><label for="oer-evaluator">Evaluator</label><input type="text" id="oer-evaluator" placeholder="Your name"></div>
+  </div>
+  <div class="criterion-card" data-criterion="1" data-checklist="oer">
+    <div class="criterion-header"><div class="criterion-number">1</div><div class="criterion-title-block"><h3>Authority &amp; Credibility</h3><div class="criterion-question">Who created this and why should we trust them? Is the author or organization clearly identified and credible?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="oer-c1" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Author or organization clearly identified; credentials or institutional affiliation verifiable; published by a recognized academic, government, or professional body</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="oer-c1" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Author identified but credentials are unclear; organization is legitimate but not a primary authority on the subject</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="oer-c1" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">No clear author or institutional affiliation; anonymous webpage; no way to verify credentials</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Author name, credentials, publishing organization…"></textarea></div>
+    <div class="source-tag">Sources: ASCCC (Ethical Use/Transparency); Workforce EdTech (Proven Effectiveness)</div>
+  </div>
+  <div class="criterion-card" data-criterion="2" data-checklist="oer">
+    <div class="criterion-header"><div class="criterion-number">2</div><div class="criterion-title-block"><h3>Accuracy &amp; Evidence</h3><div class="criterion-question">Are the claims accurate and supported by evidence? Has this been reviewed or verified?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="oer-c2" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Claims supported by verifiable evidence, citations, or data; peer-reviewed or editorially vetted; statistics and definitions accurate when checked</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="oer-c2" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Generally accurate but some claims unverified or unsupported; anecdotal evidence used where data would be stronger</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="oer-c2" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Inaccurate, misleading, or unsupported claims; no citations or evidence provided; contradicts established knowledge in the field</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Specific claims checked, citation quality, peer review status…"></textarea></div>
+    <div class="source-tag">Sources: Jefferson College VALID-AI (Accuracy Check); ASCCC (Bias and Fairness)</div>
+  </div>
+  <div class="criterion-card" data-criterion="3" data-checklist="oer">
+    <div class="criterion-header"><div class="criterion-number">3</div><div class="criterion-title-block"><h3>Currency <span class="revised-tag">Revised</span></h3><div class="criterion-question">Is this current enough for the subject? In fast-moving fields, when was this last updated — and when should it be re-evaluated?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="oer-c3" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Recently published or updated; all links functional; appropriate for the rate of change in this subject area; evaluator has set a re-evaluation date appropriate to the field (e.g., annually for AI-adjacent topics, every 3–5 years for foundational concepts)</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="oer-c3" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Somewhat dated but core content remains valid; some links may be broken; foundational enough that age is not disqualifying — but a re-evaluation date should still be set</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="oer-c3" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Outdated for the subject; superseded by newer research or standards; broken links or references to discontinued tools or policies; no viable path to re-evaluation</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Publication/update date, rate of change in this field, broken links, planned re-evaluation date…"></textarea></div>
+    <div class="source-tag">Sources: Workforce EdTech (Longevity); Bovard (Workload — sustainability) | Revised: added iterative re-evaluation framing per Mariette’s Week 3 feedback on treating OER adoption as an ongoing process rather than a one-time decision</div>
+  </div>
+  <div class="criterion-card" data-criterion="4" data-checklist="oer">
+    <div class="criterion-header"><div class="criterion-number">4</div><div class="criterion-title-block"><h3>Relevance &amp; Course Alignment</h3><div class="criterion-question">Does this match the course outcomes, student level, and learning context where it will be used?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="oer-c4" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Directly supports specific course outcomes; appropriate reading level and complexity for the intended student population; could be assigned as-is</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="oer-c4" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Relevant to the subject but requires framing, excerpting, or scaffolding to be useful; level mismatch (too advanced or too introductory)</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="oer-c4" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Does not align with course outcomes or student needs; significant level or scope mismatch; requires too much adaptation to be worthwhile</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Which course/outcome does this support? Reading level? Adaptation needed?"></textarea></div>
+    <div class="source-tag">Sources: EDUCAUSE (Instructional Alignment); ASCCC (Pedagogical Alignment)</div>
+  </div>
+  <div class="criterion-card" data-criterion="5" data-checklist="oer">
+    <div class="criterion-header"><div class="criterion-number">5</div><div class="criterion-title-block"><h3>Purpose, Perspective &amp; Representation <span class="revised-tag">Revised</span></h3><div class="criterion-question">Who made this and why? What perspective is centered, and what’s missing? Whose voices and experiences are reflected — or absent?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="oer-c5" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Purpose is clear and transparent; multiple perspectives represented or bias is explicitly acknowledged; authorship reflects diverse voices; no undisclosed conflict of interest; examples and contexts reflect a range of student backgrounds and experiences</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="oer-c5" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Some bias present but usable with faculty framing; perspective gaps identifiable and addressable through supplemental materials; authorship skews narrow but content is not exclusionary</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="oer-c5" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Significant undisclosed bias or conflict of interest; single perspective presented as universal; content excludes or misrepresents significant student populations; promotional content disguised as educational</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Who funded/created this? What perspective is centered? Whose experiences are reflected? What’s missing?"></textarea></div>
+    <div class="source-tag">Sources: Jefferson College VALID-AI (Diversity and Bias); ASCCC (Bias and Fairness) | Revised: renamed from “Purpose, Perspective &amp; Bias”; added authorship diversity and student experience representation language — self-identified gap in Week 1 reflection</div>
+  </div>
+  <div class="criterion-card" data-criterion="6" data-checklist="oer">
+    <div class="criterion-header"><div class="criterion-number">6</div><div class="criterion-title-block"><h3>Accessibility &amp; Usability <span class="revised-tag">Revised</span></h3><div class="criterion-question">Can all students access and use this — including students with disabilities, students on mobile devices, and students with limited bandwidth?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="oer-c6" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">WCAG-compliant or clearly accessible; readable formatting, alt text on images, captions on video; works on mobile and low-bandwidth connections; no paywall or account required; designed with Universal Design for Learning (UDL) principles — multiple means of representation, engagement, and expression</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="oer-c6" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Mostly accessible but with gaps (e.g., missing captions, poor mobile experience, minor formatting issues); may require adaptation before sharing widely; UDL principles partially addressed</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="oer-c6" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Significant accessibility barriers; paywalled; poor scan quality; no captions on video; inaccessible to screen readers; requires high-speed connection or specific hardware not all students have</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="Accessibility issues found, device compatibility, paywall status, UDL considerations…"></textarea></div>
+    <div class="source-tag">Sources: EDUCAUSE (Accessibility Standards, UDL); Bovard (Access — ADA); ASCCC (Support for Diverse Needs) | Revised: added explicit UDL framework reference, low-bandwidth access consideration, and mobile compatibility — self-identified gap in Week 1 reflection</div>
+  </div>
+  <div class="criterion-card" data-criterion="7" data-checklist="oer">
+    <div class="criterion-header"><div class="criterion-number">7</div><div class="criterion-title-block"><h3>Open Licensing &amp; Permissions</h3><div class="criterion-question">Can we actually use, share, or adapt this? What does the license allow?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="oer-c7" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Clear Creative Commons license (CC-BY or equivalent); can be freely shared, linked, and adapted; no hidden platform fees or redistribution restrictions</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="oer-c7" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Free to view and link but not to download, remix, or redistribute; license unclear but usage appears permitted in educational contexts</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="oer-c7" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Copyright-restricted; requires institutional subscription or purchase; redistribution or adaptation not permitted</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="License type, usage restrictions, adaptation rights…"></textarea></div>
+    <div class="source-tag">Sources: EDUCAUSE (Privacy, Data Protection &amp; Rights — IP); Bovard (Privacy &amp; IP)</div>
+  </div>
+  <div class="criterion-card" data-criterion="8" data-checklist="oer">
+    <div class="criterion-header"><div class="criterion-number">8</div><div class="criterion-title-block"><h3>Adaptability &amp; Practical Usability</h3><div class="criterion-question">Can this be revised, downloaded, or shared in useful formats? Is it truly no-cost for students?</div></div></div>
+    <div class="rating-options">
+      <label class="rating-option score-2"><input type="radio" name="oer-c8" value="2"><div class="option-label"><span class="score-badge">2 — Meets</span><span class="option-text">Editable source files available; downloadable in multiple formats; printable; no student-facing cost; can be remixed for institutional context</span></div></label>
+      <label class="rating-option score-1"><input type="radio" name="oer-c8" value="1"><div class="option-label"><span class="score-badge">1 — Partial</span><span class="option-text">Useful as-is but limited adaptability; downloadable but not easily editable; minor costs to students for premium features</span></div></label>
+      <label class="rating-option score-0"><input type="radio" name="oer-c8" value="0"><div class="option-label"><span class="score-badge">0 — Does Not Meet</span><span class="option-text">Not downloadable or adaptable; locked to a platform; hidden student costs; cannot be localized for SCC context</span></div></label>
+    </div>
+    <div class="criterion-notes"><label>Notes</label><textarea placeholder="File formats available, student cost, remix potential…"></textarea></div>
+    <div class="source-tag">Sources: EDUCAUSE (Archiving, Saving &amp; Exporting); Bovard (Privacy &amp; IP — archival); Workforce EdTech (Affordability)</div>
+  </div>
+  <div class="results-panel" id="oer-results">
+    <h3>Evaluation Summary</h3>
+    <div class="score-display">
+      <div class="score-number" id="oer-score-num" style="color:var(--scc-green)">—</div>
+      <div class="score-label">out of 16 possible points</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="oer-score-bar" style="width:0%;background:var(--gray-400)"></div></div>
+      <div id="oer-score-label" style="font-size:.88rem;color:var(--gray-600)">Rate the criteria above to see your score.</div>
+    </div>
+    <p style="font-size:.85rem;color:var(--gray-600);margin-bottom:1rem;font-weight:600">Recommendation:</p>
+    <div class="decision-grid">
+      <div class="decision-option" id="oer-dec-use" onclick="setDecision('oer','use')">✓ Use As-Is</div>
+      <div class="decision-option" id="oer-dec-adapt" onclick="setDecision('oer','adapt')">◎ Use with Adaptation</div>
+      <div class="decision-option" id="oer-dec-supp" onclick="setDecision('oer','supp')">△ Supplemental Only</div>
+      <div class="decision-option" id="oer-dec-pass" onclick="setDecision('oer','pass')">✕ Do Not Use</div>
+    </div>
+    <div class="action-buttons">
+      <button class="btn btn-primary" onclick="generateOutput('oer')">Generate Summary Text</button>
+      <button class="btn btn-secondary" onclick="resetChecklist('oer')">Reset</button>
+    </div>
+    <div class="print-output" id="oer-output"></div>
+  </div>
+</div>
 
 </main>
-
 <footer>
-  Built by <a href="https://laurenbschwartz.github.io" target="_blank">Lauren B. Schwartz</a> · Salem Community College Instructional Development ·
+  Built by <a href="https://laurenbschwartz.github.io" target="_blank">Lauren B. Schwartz</a> &middot; Salem Community College Instructional Development &middot;
   <a href="https://elbies19.github.io/ai-literacy-training-course/" target="_blank">AI Literacy Training Course</a>
 </footer>
-
 <script>
-  // Tab switching
-  function switchTab(tab, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b => {
-      b.classList.remove('active');
-      b.setAttribute('aria-selected', 'false');
-    });
-    document.querySelectorAll('.checklist-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
-    document.getElementById('panel-' + tab).classList.add('active');
-  }
-
-  // Live scoring
-  document.querySelectorAll('input[type="radio"]').forEach(radio => {
-    radio.addEventListener('change', function() {
-      const name = this.name;
-      const checklist = name.split('-')[0];
-      const val = parseInt(this.value);
-
-      // Update visual state of this criterion's options
-      const options = document.querySelectorAll(`input[name="${name}"]`);
-      options.forEach(opt => {
-        const label = opt.closest('.rating-option');
-        label.classList.remove('selected-2', 'selected-1', 'selected-0');
-      });
-      const selectedLabel = this.closest('.rating-option');
-      selectedLabel.classList.add('selected-' + val);
-
-      updateScore(checklist);
-    });
-  });
-
-  function updateScore(checklist) {
-    const prefix = checklist + '-c';
-    let total = 0;
-    let answered = 0;
-
-    for (let i = 1; i <= 8; i++) {
-      const selected = document.querySelector(`input[name="${prefix}${i}"]:checked`);
-      if (selected) {
-        total += parseInt(selected.value);
-        answered++;
-      }
-    }
-
-    const scoreEl = document.getElementById(checklist + '-score-num');
-    const barEl = document.getElementById(checklist + '-score-bar');
-    const labelEl = document.getElementById(checklist + '-score-label');
-
-    if (answered === 0) {
-      scoreEl.textContent = '—';
-      barEl.style.width = '0%';
-      barEl.style.background = 'var(--gray-400)';
-      labelEl.textContent = 'Rate the criteria above to see your score.';
-      return;
-    }
-
-    const pct = (total / 16) * 100;
-    scoreEl.textContent = total + '/16';
-    barEl.style.width = pct + '%';
-
-    let color, msg;
-    if (pct >= 75) {
-      color = 'var(--green)';
-      scoreEl.style.color = 'var(--green)';
-      msg = 'Strong candidate for adoption.';
-    } else if (pct >= 50) {
-      color = 'var(--amber)';
-      scoreEl.style.color = 'var(--amber)';
-      msg = 'Promising with some concerns — consider a pilot.';
-    } else {
-      color = 'var(--red)';
-      scoreEl.style.color = 'var(--red)';
-      msg = 'Significant barriers identified — proceed with caution or pass.';
-    }
-
-    barEl.style.background = color;
-    labelEl.textContent = (answered < 8 ? `(${answered} of 8 criteria rated) ` : '') + msg;
-  }
-
-  // Decision buttons
-  const decisionMap = {
-    tools: { adopt: 'selected-adopt', pilot: 'selected-pilot', support: 'selected-pilot', pass: 'selected-pass' },
-    oer: { use: 'selected-adopt', adapt: 'selected-pilot', supp: 'selected-pilot', pass: 'selected-pass' }
-  };
-
-  function setDecision(checklist, decision) {
-    const prefix = checklist + '-dec-';
-    const ids = checklist === 'tools'
-      ? ['adopt','pilot','support','pass']
-      : ['use','adapt','supp','pass'];
-
-    ids.forEach(id => {
-      const el = document.getElementById(prefix + id);
-      el.classList.remove('selected-adopt', 'selected-pilot', 'selected-pass');
-    });
-
-    const el = document.getElementById(prefix + decision);
-    const cls = decision === 'adopt' || decision === 'use' ? 'selected-adopt'
-               : decision === 'pass' ? 'selected-pass'
-               : 'selected-pilot';
-    el.classList.add(cls);
-  }
-
-  // Generate output text
-  function generateOutput(checklist) {
-    const prefix = checklist + '-c';
-    const isTools = checklist === 'tools';
-    const nameEl = document.getElementById(isTools ? 'tool-name' : 'oer-name');
-    const dateEl = document.getElementById(isTools ? 'tool-date' : 'oer-date');
-    const evalEl = document.getElementById(isTools ? 'tool-evaluator' : 'oer-evaluator');
-
-    const title = isTools ? 'ONLINE TOOL EVALUATION' : 'OER & ONLINE RESOURCE EVALUATION';
-    const criteria = isTools ? [
-      'Instructional Alignment & Value',
-      'Affordability & Total Cost of Ownership',
-      'Redundancy Check',
-      'Vendor Stability & Ownership',
-      'Instructor Lift',
-      'Strategic Plan Alignment',
-      'Canvas Integration',
-      'Student Learning Outcomes'
-    ] : [
-      'Authority & Credibility',
-      'Accuracy & Evidence',
-      'Currency',
-      'Relevance & Course Alignment',
-      'Purpose, Perspective & Bias',
-      'Accessibility & Usability',
-      'Open Licensing & Permissions',
-      'Adaptability & Practical Usability'
-    ];
-
-    let output = `${title}\n`;
-    output += `${'='.repeat(40)}\n`;
-    output += `${isTools ? 'Tool' : 'Resource'}: ${nameEl.value || '(unnamed)'}\n`;
-    output += `Date: ${dateEl.value || '(not set)'}\n`;
-    output += `Evaluator: ${evalEl.value || '(unnamed)'}\n`;
-    output += `\n`;
-
-    let total = 0;
-    let answered = 0;
-
-    criteria.forEach((crit, i) => {
-      const n = i + 1;
-      const selected = document.querySelector(`input[name="${prefix}${n}"]:checked`);
-      const notes = document.querySelector(`[data-criterion="${n}"][data-checklist="${checklist}"] textarea`);
-      const score = selected ? selected.value : '—';
-      const ratings = { '2': 'MEETS', '1': 'PARTIAL', '0': 'DOES NOT MEET', '—': 'NOT RATED' };
-
-      if (selected) { total += parseInt(score); answered++; }
-
-      output += `${n}. ${crit}\n`;
-      output += `   Score: ${score}/2 — ${ratings[score]}\n`;
-      if (notes && notes.value.trim()) {
-        output += `   Notes: ${notes.value.trim()}\n`;
-      }
-      output += `\n`;
-    });
-
-    output += `${'─'.repeat(40)}\n`;
-    output += `TOTAL SCORE: ${total}/${answered * 2} rated (${16} possible)\n`;
-
-    const pct = answered > 0 ? (total / (answered * 2)) * 100 : 0;
-    output += `PERCENTAGE: ${Math.round(pct)}%\n\n`;
-
-    // Decision
-    const decIds = isTools ? ['adopt','pilot','support','pass'] : ['use','adapt','supp','pass'];
-    const decLabels = isTools
-      ? { adopt: 'ADOPT', pilot: 'PILOT FIRST', support: 'ADOPT WITH SUPPORT', pass: 'DO NOT ADOPT' }
-      : { use: 'USE AS-IS', adapt: 'USE WITH ADAPTATION', supp: 'SUPPLEMENTAL ONLY', pass: 'DO NOT USE' };
-    let decision = 'Not selected';
-    decIds.forEach(id => {
-      const el = document.getElementById(`${checklist}-dec-${id}`);
-      if (el && (el.classList.contains('selected-adopt') || el.classList.contains('selected-pilot') || el.classList.contains('selected-pass'))) {
-        decision = decLabels[id];
-      }
-    });
-    output += `RECOMMENDATION: ${decision}\n`;
-    output += `\n— Generated by SCC Tool & Resource Evaluation Checklists\n`;
-    output += `   laurenbschwartz.github.io\n`;
-
-    const outputEl = document.getElementById(checklist + '-output');
-    outputEl.textContent = output;
-    outputEl.classList.add('visible');
-  }
-
-  function resetChecklist(checklist) {
-    if (!confirm('Reset all ratings and notes for this checklist?')) return;
-    const prefix = checklist + '-c';
-    for (let i = 1; i <= 8; i++) {
-      document.querySelectorAll(`input[name="${prefix}${i}"]`).forEach(r => {
-        r.checked = false;
-        r.closest('.rating-option').classList.remove('selected-2', 'selected-1', 'selected-0');
-      });
-      const card = document.querySelector(`[data-criterion="${i}"][data-checklist="${checklist}"]`);
-      if (card) {
-        const ta = card.querySelector('textarea');
-        if (ta) ta.value = '';
-      }
-    }
-    const decIds = checklist === 'tools' ? ['adopt','pilot','support','pass'] : ['use','adapt','supp','pass'];
-    decIds.forEach(id => {
-      const el = document.getElementById(`${checklist}-dec-${id}`);
-      if (el) el.classList.remove('selected-adopt', 'selected-pilot', 'selected-pass');
-    });
-    document.getElementById(checklist + '-output').classList.remove('visible');
-    document.getElementById(checklist + '-output').textContent = '';
-    updateScore(checklist);
-  }
-
-  // Set today's date
-  const today = new Date().toISOString().split('T')[0];
-  document.querySelectorAll('input[type="date"]').forEach(d => d.value = today);
+function switchTab(tab,btn){document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false')});document.querySelectorAll('.checklist-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');btn.setAttribute('aria-selected','true');document.getElementById('panel-'+tab).classList.add('active')}
+document.querySelectorAll('input[type="radio"]').forEach(r=>{r.addEventListener('change',function(){const n=this.name,cl=n.split('-')[0],v=parseInt(this.value);document.querySelectorAll(`input[name="${n}"]`).forEach(o=>o.closest('.rating-option').classList.remove('selected-2','selected-1','selected-0'));this.closest('.rating-option').classList.add('selected-'+v);updateScore(cl)})});
+function updateScore(cl){const mx=cl==='tools'?9:8,mxS=mx*2;let t=0,a=0;for(let i=1;i<=mx;i++){const s=document.querySelector(`input[name="${cl}-c${i}"]:checked`);if(s){t+=parseInt(s.value);a++}}const sN=document.getElementById(cl+'-score-num'),sB=document.getElementById(cl+'-score-bar'),sL=document.getElementById(cl+'-score-label');if(a===0){sN.textContent='—';sB.style.width='0%';sB.style.background='var(--gray-400)';sL.textContent='Rate the criteria above to see your score.';return}const p=(t/mxS)*100;sN.textContent=t+'/'+mxS;sB.style.width=p+'%';let c,m;if(p>=75){c='var(--green)';sN.style.color='var(--green)';m=cl==='tools'?'Strong candidate for adoption.':'Strong candidate for use.'}else if(p>=50){c='var(--amber)';sN.style.color='var(--amber)';m='Promising with some concerns — consider a pilot or adaptation.'}else{c='var(--red)';sN.style.color='var(--red)';m='Significant barriers identified — proceed with caution.'}sB.style.background=c;sL.textContent=(a<mx?`(${a} of ${mx} criteria rated) `:'')+m}
+function setDecision(cl,d){const ids=cl==='tools'?['adopt','pilot','support','pass']:['use','adapt','supp','pass'];ids.forEach(id=>document.getElementById(cl+'-dec-'+id).classList.remove('selected-adopt','selected-pilot','selected-pass'));const cls=d==='adopt'||d==='use'?'selected-adopt':d==='pass'?'selected-pass':'selected-pilot';document.getElementById(cl+'-dec-'+d).classList.add(cls)}
+function generateOutput(cl){const iT=cl==='tools',nE=document.getElementById(iT?'tool-name':'oer-name'),dE=document.getElementById(iT?'tool-date':'oer-date'),eE=document.getElementById(iT?'tool-evaluator':'oer-evaluator'),mx=iT?9:8,mxS=mx*2,title=iT?'ONLINE TOOL EVALUATION':'OER & ONLINE RESOURCE EVALUATION';const crit=iT?['Instructional Alignment & Value','Affordability & Total Cost of Ownership','Redundancy Check','Vendor Stability & Ownership','Instructor Lift','Strategic Plan Alignment','Canvas Integration','Student Learning Outcomes','Equity, Belonging & Representation']:['Authority & Credibility','Accuracy & Evidence','Currency','Relevance & Course Alignment','Purpose, Perspective & Representation','Accessibility & Usability','Open Licensing & Permissions','Adaptability & Practical Usability'];let out=`${title}\n${'='.repeat(40)}\n${iT?'Tool':'Resource'}: ${nE.value||'(unnamed)'}\nDate: ${dE.value||'(not set)'}\nEvaluator: ${eE.value||'(unnamed)'}\n\n`;let t=0,a=0;crit.forEach((c,i)=>{const n=i+1,s=document.querySelector(`input[name="${cl}-c${n}"]:checked`),nt=document.querySelector(`[data-criterion="${n}"][data-checklist="${cl}"] textarea`),sc=s?s.value:'—',r={'2':'MEETS','1':'PARTIAL','0':'DOES NOT MEET','—':'NOT RATED'};if(s){t+=parseInt(sc);a++}out+=`${n}. ${c}\n   Score: ${sc}/2 — ${r[sc]}\n`;if(nt&&nt.value.trim())out+=`   Notes: ${nt.value.trim()}\n`;out+='\n'});out+=`${'\u2500'.repeat(40)}\nTOTAL SCORE: ${t}/${mxS} possible\nPERCENTAGE: ${a>0?Math.round((t/mxS)*100):0}%\n\n`;const dIds=iT?['adopt','pilot','support','pass']:['use','adapt','supp','pass'],dL=iT?{adopt:'ADOPT',pilot:'PILOT FIRST',support:'ADOPT WITH SUPPORT',pass:'DO NOT ADOPT'}:{use:'USE AS-IS',adapt:'USE WITH ADAPTATION',supp:'SUPPLEMENTAL ONLY',pass:'DO NOT USE'};let dec='Not selected';dIds.forEach(id=>{const el=document.getElementById(`${cl}-dec-${id}`);if(el&&(el.classList.contains('selected-adopt')||el.classList.contains('selected-pilot')||el.classList.contains('selected-pass')))dec=dL[id]});out+=`RECOMMENDATION: ${dec}\n\n— Generated by SCC Tool & Resource Evaluation Checklists\n   laurenbschwartz.github.io\n`;const oE=document.getElementById(cl+'-output');oE.textContent=out;oE.classList.add('visible')}
+function resetChecklist(cl){if(!confirm('Reset all ratings and notes for this checklist?'))return;const mx=cl==='tools'?9:8;for(let i=1;i<=mx;i++){document.querySelectorAll(`input[name="${cl}-c${i}"]`).forEach(r=>{r.checked=false;r.closest('.rating-option').classList.remove('selected-2','selected-1','selected-0')});const card=document.querySelector(`[data-criterion="${i}"][data-checklist="${cl}"]`);if(card){const ta=card.querySelector('textarea');if(ta)ta.value=''}}const dIds=cl==='tools'?['adopt','pilot','support','pass']:['use','adapt','supp','pass'];dIds.forEach(id=>{const el=document.getElementById(cl+'-dec-'+id);if(el)el.classList.remove('selected-adopt','selected-pilot','selected-pass')});document.getElementById(cl+'-output').classList.remove('visible');document.getElementById(cl+'-output').textContent='';updateScore(cl)}
+document.querySelectorAll('input[type="date"]').forEach(d=>d.value=new Date().toISOString().split('T')[0]);
 </script>
 </body>
 </html>
