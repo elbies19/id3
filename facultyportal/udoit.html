@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UDOIT — Check Your Course's Accessibility | SCC Faculty Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --dp-primary: #016450;
+  --dp-primary-dark: #014a3b;
+  --dp-primary-light: #e6f0ed;
+  --dp-primary-mid: #c8ddd9;
+  --dp-gray: #B2B2B2;
+  --dp-graybg: #D9D9D9;
+  --dp-gray-text: #636363;
+  --dp-white: #ffffff;
+  --dp-body-bg: #f4f4f4;
+  --dp-border: #d0d0d0;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Lato', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: #1a1a1a; background: var(--dp-body-bg); }
+
+/* NAV */
+.site-nav { background: var(--dp-primary); padding: 0 1.5rem; display: flex; align-items: center; height: 48px; gap: 1.5rem; }
+.site-nav .brand { font-family: var(--font-heading); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.9); text-decoration: none; }
+.site-nav .nav-links { margin-left: auto; display: flex; }
+.site-nav .nav-links a { font-family: var(--font-heading); font-size: 11px; font-weight: 600; letter-spacing: 0.05em; color: rgba(255,255,255,0.75); text-decoration: none; padding: 0 0.9rem; height: 48px; display: flex; align-items: center; border-bottom: 3px solid transparent; transition: all 0.15s; }
+.site-nav .nav-links a:hover, .site-nav .nav-links a.active { color: #fff; border-bottom-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.08); }
+
+/* PAGE HEADER */
+.page-header { background: var(--dp-primary); border-bottom: 2px solid var(--dp-primary-mid); padding: 0; }
+.dp-header-top { background: var(--dp-primary); padding: 1.1rem 1.4rem 1rem; max-width: 960px; margin: 0 auto; }
+.dp-header-pre { font-family: var(--font-heading); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.35); border-radius: 3px; display: inline-block; padding: 2px 8px; margin-bottom: 0.4rem; }
+.dp-header-title { font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: #fff; line-height: 1.2; }
+.dp-header-desc { background: #f9f9f9; border-top: 2px solid var(--dp-primary); padding: 0.9rem 1.4rem; font-size: 14.5px; color: var(--dp-gray-text); line-height: 1.65; }
+.dp-header-desc-inner { max-width: 960px; margin: 0 auto; }
+
+/* PAGE BODY */
+.dp-page { max-width: 960px; margin: 1.5rem auto; padding: 0 1.25rem; }
+
+/* TABS */
+.dp-tabs-wrapper { display: flex; background: var(--dp-white); border: 1px solid var(--dp-border); border-radius: 4px; overflow: hidden; min-height: 500px; }
+.dp-tab-buttons { width: 230px; flex-shrink: 0; border-right: 1px solid var(--dp-border); background: #fafafa; display: flex; flex-direction: column; }
+.dp-tab-btn { font-family: var(--font-heading); font-size: 12px; font-weight: 600; color: var(--dp-gray-text); background: none; border: none; border-bottom: 1px solid var(--dp-border); border-left: 4px solid transparent; padding: 0.85rem 1rem 0.85rem 0.85rem; text-align: left; cursor: pointer; line-height: 1.35; transition: all 0.12s; }
+.dp-tab-btn:hover { background: var(--dp-primary-light); color: var(--dp-primary-dark); border-left-color: var(--dp-primary-mid); }
+.dp-tab-btn.active { background: var(--dp-primary-light); color: var(--dp-primary); border-left-color: var(--dp-primary); font-weight: 700; }
+.dp-tab-panels { flex: 1; padding: 1.5rem 1.75rem; overflow-y: auto; }
+.dp-tab-panel { display: none; }
+.dp-tab-panel.active { display: block; }
+
+/* PANEL HEADING */
+.dp-panel-heading-display { font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--dp-primary-dark); border-bottom: 3px solid var(--dp-primary); padding-bottom: 0.5rem; margin-bottom: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
+.dp-panel-heading-display .panel-icon { width: 24px; height: 24px; background: var(--dp-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 11px; color: #fff; }
+
+/* BODY TEXT */
+.panel-intro { font-size: 14.5px; color: var(--dp-gray-text); margin-bottom: 1rem; line-height: 1.65; }
+.panel-intro + .panel-intro { margin-top: -0.25rem; }
+.panel-p { font-size: 14.5px; color: var(--dp-gray-text); line-height: 1.7; margin-bottom: 0.85rem; }
+.panel-p a { color: var(--dp-primary); text-decoration: none; }
+.panel-p a:hover { text-decoration: underline; }
+.panel-p strong { color: #1a1a1a; }
+
+/* ISSUE LIST */
+.issue-list { list-style: none; padding: 0; margin: 0.5rem 0 1rem; }
+.issue-list li { border: 1px solid var(--dp-border); border-left: 3px solid var(--dp-primary-mid); border-radius: 0 4px 4px 0; padding: 0.65rem 1rem; margin-bottom: 0.6rem; background: #fafafa; font-size: 14px; color: var(--dp-gray-text); line-height: 1.6; }
+.issue-list li strong { color: #1a1a1a; display: block; margin-bottom: 0.2rem; }
+.issue-list li a { color: var(--dp-primary); text-decoration: none; }
+
+/* CALLOUT */
+.dp-callout { border: 1px solid var(--dp-primary); border-radius: 4px; overflow: hidden; margin: 1.25rem auto; max-width: 500px; }
+.dp-callout-title { background: var(--dp-primary); padding: 0.5rem 1rem; font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; text-align: center; }
+.dp-callout-title .fa-leaf { margin-right: 0.4rem; }
+.dp-callout-body { padding: 0.9rem 1.1rem; font-size: 13.5px; color: var(--dp-gray-text); text-align: center; line-height: 1.6; }
+.dp-callout-body a { color: var(--dp-primary); font-weight: 700; text-decoration: none; }
+.dp-callout-body strong { color: #1a1a1a; }
+
+/* HIGHLIGHT NOTE */
+.highlight-note { background: #fbeeb8; border-left: 3px solid #c9a227; padding: 0.5rem 0.85rem; border-radius: 0 3px 3px 0; font-size: 13.5px; color: #5a4200; margin: 0.5rem 0; line-height: 1.5; }
+.highlight-note strong { color: #3a2a00; }
+
+/* SUBHEADING */
+.panel-subhead { font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--dp-primary-dark); margin: 1.25rem 0 0.5rem; }
+
+/* TABLE */
+.udoit-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 13.5px; }
+.udoit-table th { background: var(--dp-primary); color: #fff; font-family: var(--font-heading); font-size: 11.5px; font-weight: 700; padding: 0.5rem 0.85rem; text-align: left; }
+.udoit-table td { padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--dp-border); color: var(--dp-gray-text); vertical-align: middle; line-height: 1.5; }
+.udoit-table tr:nth-child(even) td { background: #fafafa; }
+.udoit-table .status-icon { font-size: 18px; }
+
+/* LINK LIST */
+.dp-link-list { list-style: none; padding: 0; margin-top: 0.5rem; }
+.dp-link-list li { padding: 0.45rem 0 0.45rem 1rem; border-left: 3px solid var(--dp-primary-mid); margin-bottom: 0.5rem; background: #fafafa; border-radius: 0 3px 3px 0; font-size: 13.5px; }
+.dp-link-list li a { color: var(--dp-primary); text-decoration: none; font-weight: 600; }
+.dp-link-list li a:hover { text-decoration: underline; }
+
+/* IFRAME EMBED */
+.caption-wrangler-embed { border: 1px solid var(--dp-border); border-radius: 4px; overflow: hidden; margin: 1rem 0; }
+.caption-wrangler-embed iframe { display: block; width: 100%; border: none; }
+
+/* FOOTER */
+footer { max-width: 960px; margin: 1.25rem auto 0; padding: 1rem 1.25rem; font-size: 12.5px; color: #888; border-top: 1px solid var(--dp-border); display: flex; justify-content: space-between; }
+footer a { color: var(--dp-primary); text-decoration: none; }
+
+@media (max-width: 680px) {
+  .dp-tabs-wrapper { flex-direction: column; }
+  .dp-tab-buttons { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--dp-border); }
+  .dp-tab-btn { border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+  .dp-tab-btn.active { border-left: none; border-bottom-color: var(--dp-primary); }
+  .site-nav .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="https://elbies19.github.io/id3/facultyportal/" class="brand">SCC Faculty Portal</a>
+  <div class="nav-links">
+    <a href="https://elbies19.github.io/id3/facultyportal/instructor-checklist.html">Instructor Checklist</a>
+    <a href="https://elbies19.github.io/id3/facultyportal/oer-materials-v2.html">OER Materials</a>
+    <a href="https://elbies19.github.io/id3/facultyportal/teaching-tools-v2.html">Teaching Tools</a>
+    <a href="https://elbies19.github.io/id3/facultyportal/udoit.html" class="active">UDOIT</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="dp-header-top">
+    <div class="dp-header-pre">New to Canvas</div>
+    <div class="dp-header-title">UDOIT &mdash; Check Your Course&rsquo;s Accessibility</div>
+  </div>
+  <div class="dp-header-desc">
+    <div class="dp-header-desc-inner">
+      As part of our institutional commitment to accessibility and Universal Design for Learning (UDL), Salem Community College has partnered with CidiLabs to offer its UDOIT Accessibility Checker tool to our instructors in Canvas. This course-level tool allows you to check the accessibility of your course content in real time &mdash; and quickly fix most issues that may arise. UDOIT&rsquo;s checked criteria are mapped directly to Web Content Accessibility Guidelines (WCAG) criteria.
+    </div>
+  </div>
+</div>
+
+<div class="dp-page">
+  <div class="dp-tabs-wrapper">
+    <div class="dp-tab-buttons">
+      <button class="dp-tab-btn active" data-tab="what">What is UDOIT?</button>
+      <button class="dp-tab-btn" data-tab="looks">What does UDOIT look for?</button>
+      <button class="dp-tab-btn" data-tab="scan">How do I scan my course?</button>
+      <button class="dp-tab-btn" data-tab="score">What does my score mean?</button>
+      <button class="dp-tab-btn" data-tab="fix">How do I fix issues?</button>
+      <button class="dp-tab-btn" data-tab="manual">When to manually resolve</button>
+      <button class="dp-tab-btn" data-tab="wrangler">YouTube Caption Wrangler</button>
+      <button class="dp-tab-btn" data-tab="resources">Resources</button>
+    </div>
+
+    <div class="dp-tab-panels">
+
+      <!-- WHAT IS UDOIT -->
+      <div class="dp-tab-panel active" id="tab-what">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-info" aria-hidden="true"></i></span>
+          What is UDOIT?
+        </div>
+        <p class="panel-p"><strong>UDOIT</strong> &mdash; pronounced &ldquo;You Do It&rdquo; &mdash; stands for the <strong>U</strong>niversal <strong>D</strong>esign <strong>O</strong>nline <strong>I</strong>nspection <strong>T</strong>ool. UDOIT is a course-level accessibility checker that scans online course content, identifies possible accessibility issues, and guides course designers and instructors in repairing those issues using inclusive design principles &mdash; all from within the UDOIT interface.</p>
+
+        <div class="dp-callout">
+          <div class="dp-callout-title"><i class="fas fa-leaf"></i> SCC Teaching Tip</div>
+          <div class="dp-callout-body">UDOIT should be available to you in the left-hand navigation of your Canvas course as <strong>&ldquo;UDOIT Cloud&rdquo;</strong>. If you do not see UDOIT available in <strong>each</strong> of your classes, contact the Academic Technology Team at <a href="mailto:lschwartz@salemcc.edu">lschwartz@salemcc.edu</a>.</div>
+        </div>
+      </div>
+
+      <!-- WHAT DOES UDOIT LOOK FOR -->
+      <div class="dp-tab-panel" id="tab-looks">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-search" aria-hidden="true"></i></span>
+          What does UDOIT look for?
+        </div>
+        <p class="panel-p">UDOIT is configured to identify a wide variety of potential accessibility issues in Canvas content, including but not limited to:</p>
+        <ul class="issue-list">
+          <li><strong>Insufficient color contrast with background</strong>Text color should be easily viewable and should not be the only indicator of meaning or function. Color balance should have at least a 4.5:1 ratio for small text and 3:1 ratio for large text.</li>
+          <li><strong>Using color for text without additional emphasis (e.g. bold or italics)</strong>Color can enhance content aesthetics, but it shouldn&rsquo;t be the only way of conveying meaning. Use color with another visual cue like bold text, icons, or descriptive wording to ensure users with color blindness or screen readers can understand the emphasis.</li>
+          <li><strong>Missing or insufficient alt text for uploaded images</strong>Alternative Text (Alt Text) is a non-visual way to describe the meaning of an image. Provide a brief description for screen reader users. It should not be the image file name and should be 150 characters or less.</li>
+          <li><strong>Lack of captions in video content</strong>Include captions with all video content to ensure accessibility for users who are deaf or hard of hearing. Captions should cover dialogue, sound effects, and speaker identification.</li>
+          <li><strong>Auto-generated captions in video content</strong>Auto-generated captions are often inaccurate. For educational content, use accurate, manually reviewed captions. We highly recommend using Canvas Studio for video content &mdash; it provides auto-generated captions and an easy interface for manual review.</li>
+          <li><strong>Skipped heading levels or confusing page structure</strong>Headings should follow a clear hierarchy. Start with H2 in course content and move to deeper levels (H3, H4, etc.) as you create subsections. Avoid skipping heading levels to help screen readers and all users navigate your content.</li>
+          <li><strong>Nondescript link text (e.g. &ldquo;click here&rdquo;)</strong>Use descriptive link text that clearly identifies the content being linked to (e.g., &ldquo;Class Schedule&rdquo; instead of &ldquo;Click Here&rdquo; or &ldquo;schedule.html&rdquo;).</li>
+        </ul>
+
+        <div class="dp-callout">
+          <div class="dp-callout-title"><i class="fas fa-leaf"></i> SCC Teaching Tip</div>
+          <div class="dp-callout-body">A full list of accessibility criteria evaluated in UDOIT can be found in <a href="https://cidilabs.instructure.com/courses/6621/pages/what-does-udoit-look-for?module_item_id=170598" target="_blank" rel="noopener">the UDOIT User Guide</a>. As WCAG criteria evolve, these may change and/or result in changes to your overall course accessibility score. <a href="mailto:lschwartz@salemcc.edu">Contact the Academic Technology Team</a> for guidance.</div>
+        </div>
+      </div>
+
+      <!-- HOW TO SCAN -->
+      <div class="dp-tab-panel" id="tab-scan">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-play" aria-hidden="true"></i></span>
+          How do I use UDOIT to scan my course?
+        </div>
+        <p class="panel-p">When selected from the Canvas course menu, UDOIT will automatically scan a course once per day. You can scan a course multiple times per day by selecting the <strong>&ldquo;Scan Now&rdquo;</strong> button in the upper right corner.</p>
+        <p class="panel-p">The first time you access the tool, UDOIT will scan all of the content in your course. This full scan may take a few minutes to complete. In subsequent uses, UDOIT will only scan new and updated content to complete the process more efficiently.</p>
+
+        <div class="dp-callout">
+          <div class="dp-callout-title"><i class="fas fa-leaf"></i> SCC Teaching Tip</div>
+          <div class="dp-callout-body">Plan to initiate an initial UDOIT scan in your course(s) at the beginning of the semester. <strong>Your first scan may take some time to complete.</strong> <a href="mailto:lschwartz@salemcc.edu">Contact the Academic Technology Team</a> if your scan does not complete or if you encounter any issues.</div>
+        </div>
+      </div>
+
+      <!-- SCORE -->
+      <div class="dp-tab-panel" id="tab-score">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-chart-bar" aria-hidden="true"></i></span>
+          What does my UDOIT score mean?
+        </div>
+        <p class="panel-p">UDOIT provides instructors with several different scores, broadly separated into your <strong>overall course score</strong> and your <strong>category scores.</strong></p>
+        <ul class="issue-list">
+          <li><strong>Overall course score</strong>An aggregated weighted percentage that takes into account: how many accessibility issues are present, the severity of any identified issues, and the level of potential impact to students.</li>
+          <li><strong>Category scores</strong>A breakdown of identified issues in three categories: High Impact (60% of your overall score), Medium Impact (30%), and Low Impact (10%).</li>
+        </ul>
+        <p class="panel-p">UDOIT utilizes a weighted rubric to identify accessibility issues in descending order of severity. This rubric is customized to SCC and allows us to identify the most common issues in our courses while giving instructors the opportunity to quickly remedy the most easily-fixed issues.</p>
+        <p class="panel-p">Currently, UDOIT <strong>is configured to scan unpublished content</strong> in a given course in addition to all student-facing material. While this may lower your overall score, we have chosen to enable this feature to encourage instructors to cull outdated material. In many cases &mdash; especially if you&rsquo;ve been copying over a course for multiple semesters &mdash; you may find it easier to simply delete old, unused material.</p>
+
+        <div class="dp-callout">
+          <div class="dp-callout-title"><i class="fas fa-leaf"></i> SCC Teaching Tip</div>
+          <div class="dp-callout-body">Don&rsquo;t panic if you do not receive a perfect score on your first scan! The first number you receive is a <strong>preliminary</strong> score for your reference and should be seen as a guide for improvement rather than an evaluation of your course material.</div>
+        </div>
+      </div>
+
+      <!-- FIX ISSUES -->
+      <div class="dp-tab-panel" id="tab-fix">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-wrench" aria-hidden="true"></i></span>
+          How do I fix issues UDOIT identifies?
+        </div>
+        <p class="panel-p">UDOIT includes a resolution tool for identified issues called <strong>UFIXIT</strong>, available upon completion of your first course-level scan. UFIXIT classifies identified issues within three categories:</p>
+
+        <table class="udoit-table">
+          <thead>
+            <tr><th>Status</th><th>What it means</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span style="color:#c0392b;font-weight:700;">&#9888; Error</span></td>
+              <td>Active issues with accessibility that must be resolved for your course to be compliant with WCAG standards. These have the greatest impact on both the student experience and your overall UDOIT score.</td>
+            </tr>
+            <tr>
+              <td><span style="color:#2980b9;font-weight:700;">&#9432; Suggestion</span></td>
+              <td>Higher-level accessibility issues that, while still impacting the student experience and your score, may be more nuanced and require closer examination.</td>
+            </tr>
+            <tr>
+              <td><span style="color:#27ae60;font-weight:700;">&#10003; Fixed / Resolved</span></td>
+              <td>An identified issue that has been corrected within UFIXIT or manually and is no longer considered an error or suggestion within UDOIT.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="panel-p">UDOIT also identifies issues in two categories useful to instructors: <strong>Easiest to fix</strong> and <strong>High Impact Issues</strong>. These categories are available under the &ldquo;Ways to Get Started&rdquo; pane on your UDOIT dashboard after completing your first course scan.</p>
+        <ul class="issue-list">
+          <li><strong>Easiest to fix</strong>Accessibility items that take only a few moments to resolve. These may include increasing color contrast or providing descriptive alt text for an image.</li>
+          <li><strong>High Impact Issues</strong>The most critical issues identified within your course, such as links lacking descriptive text, color used alone to communicate emphasis, or video captions that are auto-generated.</li>
+        </ul>
+        <p class="panel-p">While you should plan to resolve <strong>all issues</strong> identified in UDOIT over time, these two categories provide a useful starting point as you begin working toward making your course more accessible.</p>
+
+        <div class="dp-callout">
+          <div class="dp-callout-title"><i class="fas fa-leaf"></i> SCC Teaching Tip</div>
+          <div class="dp-callout-body">DesignPLUS provides a number of useful accessibility tools that work in concert with UDOIT as you design your course material, including color contrast checkers, heading organizers, and an alt-text tool. <a href="mailto:lschwartz@salemcc.edu">Contact Lauren</a> for more information about using DesignPLUS with UDOIT.</div>
+        </div>
+      </div>
+
+      <!-- MANUAL RESOLVE -->
+      <div class="dp-tab-panel" id="tab-manual">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-hand-paper" aria-hidden="true"></i></span>
+          When is it okay to &ldquo;Manually Resolve&rdquo; an issue?
+        </div>
+        <p class="panel-p">As you are resolving issues with UDOIT, in some cases an issue cannot be fixed within the tool itself. When this happens, you have the option to use the &ldquo;Manual Resolution&rdquo; feature. It is important to know when it is appropriate to do so.</p>
+
+        <div class="panel-subhead">When manual resolution is appropriate:</div>
+        <ul class="issue-list">
+          <li>
+            <strong>YouTube Captions Scanning Unavailable</strong>
+            Although UDOIT can scan videos hosted on YouTube, the YouTube API only allows a certain number of scans per day. Sometimes the API key runs out of credits before the end of the day, resulting in this error.
+            <div class="highlight-note" style="margin-top:.5rem"><strong>NOTE: This error should only be manually resolved if you have watched the video and determined that the captions are both present and accurate.</strong></div>
+          </li>
+          <li>
+            <strong>Closed Captions Were Auto-Generated</strong>
+            When a video is uploaded from YouTube, Kaltura, or Vimeo, UDOIT can detect if captions were auto-generated. We strongly suggest you return to the video where it is hosted, adjust the captions as needed, and return to the UDOIT tool. Once captions are accurate, you can select &ldquo;Scan Video For Caption Updates&rdquo; or use Manual Resolution.
+          </li>
+          <li>
+            <strong>&ldquo;False positives&rdquo; identified by UDOIT</strong>
+            When scanning for accessibility issues, UDOIT errs on the side of caution and may occasionally flag issues that don&rsquo;t actually need to be addressed. For example, it may flag text with a dark gray color that isn&rsquo;t actually being used to signal meaning or emphasis.
+            <div class="highlight-note" style="margin-top:.5rem"><strong>Once you have used your human judgment to determine that an issue is a false positive and is not, in fact, inaccessible, using Manual Resolution will remove it from future scans.</strong></div>
+          </li>
+        </ul>
+
+        <div class="panel-subhead">When you should NOT manually resolve an issue:</div>
+        <ul class="issue-list">
+          <li>
+            <strong>Alt text missing from images</strong>
+            For these issues, you can either provide a description of the image if it is important for learners to understand the content, or mark the image as decorative if it is not relevant to the page&rsquo;s content.
+            <div class="highlight-note" style="margin-top:.5rem"><strong>Manually resolving this issue does not provide proper context for screen readers and should not be used.</strong></div>
+          </li>
+          <li>
+            <strong>Avoid using color alone for emphasis (when it&rsquo;s genuinely an issue)</strong>
+            If text actually is emphasized using color alone, this is not a false positive. Resolve it in UFIXIT by adding bolding, italicizing the text, or removing the styling altogether.
+            <div class="highlight-note" style="margin-top:.5rem"><strong>Manual resolution does not resolve the issue and therefore should not be used.</strong></div>
+          </li>
+        </ul>
+
+        <div class="dp-callout">
+          <div class="dp-callout-title"><i class="fas fa-leaf"></i> SCC Teaching Tip</div>
+          <div class="dp-callout-body">When in doubt, err on the side of caution and <strong>do not</strong> mark an issue as manually resolved unless you&rsquo;re absolutely sure the content in question is accessible. <a href="mailto:lschwartz@salemcc.edu">Contact the Academic Technology Team</a> if you&rsquo;re unable to fix an identified issue in UFIXIT or are unsure whether specific content can be manually resolved.</div>
+        </div>
+      </div>
+
+      <!-- CAPTION WRANGLER -->
+      <div class="dp-tab-panel" id="tab-wrangler">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-closed-captioning" aria-hidden="true"></i></span>
+          Using the YouTube Caption Wrangler Tool
+        </div>
+        <p class="panel-p">The <strong><a href="https://elbies19.github.io/caption-wrangler/" target="_blank" rel="noopener">YouTube Caption Wrangler</a></strong> is an AI-assisted tool created for SCC instructors, designed to help you create a reviewable caption file once you&rsquo;ve imported a YouTube video to Canvas Studio.</p>
+        <p class="panel-p"><strong>You only need three things to get started:</strong></p>
+        <ul class="dp-link-list" style="margin-bottom:1.25rem">
+          <li>A YouTube video with auto-generated captions and a transcript</li>
+          <li>The YouTube Migration feature in Canvas</li>
+          <li><a href="https://elbies19.github.io/caption-wrangler/" target="_blank" rel="noopener">The YouTube Caption Wrangler</a></li>
+        </ul>
+        <p class="panel-p">Ready to give it a try?</p>
+        <div class="caption-wrangler-embed">
+          <iframe src="https://elbies19.github.io/caption-wrangler/index.html" width="100%" height="800" title="YouTube Caption Wrangler Tool" loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <!-- RESOURCES -->
+      <div class="dp-tab-panel" id="tab-resources">
+        <div class="dp-panel-heading-display">
+          <span class="panel-icon"><i class="fas fa-link" aria-hidden="true"></i></span>
+          Resources
+        </div>
+        <ul class="dp-link-list">
+          <li><a href="https://cidilabs.instructure.com/courses/6621" target="_blank" rel="noopener">UDOIT User Guide</a></li>
+          <li><a href="https://share.vidyard.com/watch/kNoCHDfPsfJmPyArEjJDrq?" target="_blank" rel="noopener">UDOIT Video Training Series</a></li>
+          <li><a href="https://cidilabs.com/accessibility-matters-blog/" target="_blank" rel="noopener">CidiLabs Accessibility Matters Blog</a></li>
+          <li><a href="https://learnmore.cidilabs.com/search?query=Accessibility" target="_blank" rel="noopener">CidiLabs Accessibility Webinars Archive</a></li>
+          <li><a href="https://cidilabs.com/support/training/" target="_blank" rel="noopener">CidiLabs Training Calendar</a> &mdash; for UDOIT and DesignPLUS</li>
+          <li><a href="https://www.section508.gov/create/" target="_blank" rel="noopener">Creating Accessible Digital Products</a> &mdash; US General Services Administration</li>
+          <li><a href="https://cidilabs.instructure.com/courses/6621/pages/wcag-criteria-mapped-to-udoit-issues?module_item_id=375678" target="_blank" rel="noopener">WCAG Criteria Mapped to UDOIT Issues</a></li>
+          <li><a href="mailto:lschwartz@salemcc.edu">Contact the SCC Academic Technology Team</a></li>
+        </ul>
+      </div>
+
+    </div><!-- end tab panels -->
+  </div><!-- end tabs wrapper -->
+</div><!-- end dp-page -->
+
+<footer>
+  <span>Salem Community College &mdash; Faculty &amp; Adjunct Portal</span>
+  <span>Questions? <a href="mailto:lschwartz@salemcc.edu">lschwartz@salemcc.edu</a></span>
+</footer>
+
+<script>
+const buttons = document.querySelectorAll('.dp-tab-btn');
+const panels = document.querySelectorAll('.dp-tab-panel');
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    buttons.forEach(b => b.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + target).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
